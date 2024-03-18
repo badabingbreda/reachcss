@@ -1,0 +1,20 @@
+@use 'sass:list';
+
+@for $i from 1 through length($gap-steps) {
+    $step: list.nth($gap-steps, $i);
+    .#{$prefix}gap-#{$step} {
+        gap: var(--gap-#{$step});
+    }
+} 
+
+/* for beakpoints */
+@each $bp, $size in $media-breakpoints {
+    @media (min-width: #{$size}) {
+        @for $i from 1 through length($gap-steps) {
+            $step: list.nth($gap-steps, $i);
+            .#{$prefix}gap-#{$step}\@#{$bp} {
+                gap: var(--gap-#{$step});
+            }
+        } 
+    }
+} 

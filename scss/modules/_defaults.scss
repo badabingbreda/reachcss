@@ -1,0 +1,65 @@
+@use 'sass:list';
+@use 'sass:math';
+
+html {
+    font-size: $type-base-min;
+}
+
+:root {
+
+    /* --colorset names */
+    @each $setName, $set in $colors {
+        @each $colorName, $colorValue in $set {
+            --#{$colorName} : #{$colorValue};
+        }
+    }
+
+    /* --font-size- variables */
+    @for $i from 1 through length($type-steps) {
+        $step: list.nth($type-steps, $i);
+        $power: $i - $type-base-index;
+        $min: $type-base-min * math.pow($type-scale-min, $power);
+        $max: $type-base-max * math.pow($type-scale-max, $power);
+        --font-size-#{$step}: #{clamped($min, $max)};
+    } 
+    
+    /* --breakpoint- variables */
+    @each $name, $size in $media-breakpoints {
+        --breakpoint-#{$name} : #{$size};
+    }
+
+    /* --rounded- variables */
+    @for $i from 1 through length($radius-steps) {
+        $step: list.nth($radius-steps, $i);
+        $power: $i - $radius-base-index;
+        --rounded-#{$step}: #{rnd($radius-base * math.pow($radius-scale, $power),2)};
+    }
+    --rounded-50 : 50%;
+    --rounded-circle : 50%;
+
+    /* --space- variables */
+    @for $i from 1 through length($spacing-steps) {
+        $step: list.nth($spacing-steps, $i);
+        $power: $i - $spacing-base-index;
+        $min: $spacing-base-min * math.pow($spacing-scale-min, $power) * $type-base-min;
+        $max: $spacing-base-max * math.pow($spacing-scale-max, $power) * $type-base-min;
+        --spacing-#{$step}: #{clamped($min, $max)};
+    }
+
+    @for $i from 1 through length($spacing-steps) {
+        $step: list.nth($spacing-steps, $i);
+        $power: $i - $spacing-fixed-base-index;
+        $min: $spacing-fixed-base * math.pow($spacing-fixed-scale, $power) * $type-base-min;
+        --spacing-fixed-#{$step}: #{rnd($min,0)};
+    }
+
+
+    /* --gap- variables */
+    @for $i from 1 through length($gap-steps) {
+        $step: list.nth($gap-steps, $i);
+        $power: $i - $gap-base-index;
+        --gap-#{$step}: #{rnd($gap-base * math.pow($gap-scale, $power),2)};
+    }    
+
+}
+

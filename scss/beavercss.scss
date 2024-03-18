@@ -1,0 +1,56 @@
+// using:
+// https://www.fluid-type-scale.com/calculate?minFontSize=16&minWidth=400&minRatio=1.25&maxFontSize=18&maxWidth=1440&maxRatio=1.333&steps=small%2Cbase%2Cmedium%2Clarge%2Cxlarge%2Cxxlarge&baseStep=base&prefix=font-size&decimals=2&useRems=on&remValue=18&previewFont=Montserrat&previewText=Almost+before+we+knew+it%2C+we+had+left+the+ground&previewWidth=1200
+//
+$prefix : 'tb-' !default;
+$framework-beaver : 1 !default;
+
+@import 'helpers/functions';
+
+@import 'globals/breakpoint-vars';
+@import 'globals/color-vars';
+@import 'globals/font-vars';
+@import 'globals/radius-vars';
+@import 'globals/spacing-vars';
+@import 'globals/gap-vars';
+@import 'globals/utility-vars';
+
+@import 'maps/color-maps';
+
+@import 'mixins/mixins';
+
+@import 'modules/defaults';
+@import 'modules/background';
+@import 'modules/rounded';
+@import 'modules/text';
+@import 'modules/margin';
+@import 'modules/padding';
+@import 'modules/gap';
+@import 'modules/width';
+@import 'modules/utility';
+
+// possibly Beaver related styles
+@import 'beaver/button';
+@import 'beaver/box';
+@import 'beaver/photo';
+
+
+/**
+ * Please note that we are using clamp values to set 
+ * these font sizes for headings to make them resize
+ */
+h1 {
+    font-size: var(--font-size-xxlarge);
+}
+h2 {
+    font-size: var(--font-size-xlarge);
+}
+h3 {
+    font-size: var(--font-size-large);
+}
+h4 {
+    font-size: var(--font-size-medium);
+}
+
+.htmx-indicator {
+    pointer-events: none;
+}

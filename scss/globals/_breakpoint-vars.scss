@@ -1,0 +1,13 @@
+@use 'sass:math';
+
+$media-breakpoint-s     : 640px !default;
+$media-breakpoint-m    : 960px !default;
+$media-breakpoint-l     : 1200px !default;
+$media-breakpoint-xl    : 1600px !default;
+
+$media-breakpoints: (
+    s : $media-breakpoint-s,
+    m : $media-breakpoint-m,
+    l : $media-breakpoint-l,
+    xl: $media-breakpoint-xl
+);

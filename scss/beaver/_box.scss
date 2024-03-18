@@ -1,0 +1,61 @@
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:map';
+
+.#{$prefix}grid {
+    display: grid;
+}
+
+.#{$prefix}grid-1 {
+    grid-template-columns: 1fr;
+}
+
+@for $i from 2 through 4 {
+    .#{$prefix}grid-#{$i} {
+        grid-template-columns: repeat( #{$i}, 1fr );
+    }
+}
+
+@for $i from 1 through 4 {
+    .#{$prefix}grid-col-span-#{$i} {
+        grid-column: span #{$i};
+    }
+}
+
+@for $i from 1 through 4 {
+    .#{$prefix}grid-row-span-#{$i} {
+        grid-row: span #{$i};
+    }
+}
+
+
+/* for beakpoints */
+@each $bp, $size in $media-breakpoints {
+
+    @media (min-width: #{$size}) {
+
+        .#{$prefix}grid-1\@#{$bp} {
+            grid-template-columns: 1fr;
+        }
+
+        @for $i from 2 through 4 {
+            .#{$prefix}grid-#{$i}\@#{$bp} {
+                grid-template-columns: repeat( #{$i}, 1fr );
+            }
+        }
+
+        @for $i from 1 through 4 {
+            .#{$prefix}grid-col-span-#{$i}\@#{$bp} {
+                grid-column: span #{$i};
+            }
+        }
+
+        @for $i from 1 through 4 {
+            .#{$prefix}grid-row-span-#{$i}\@#{$bp} {
+                grid-row: span #{$i};
+            }
+        }
+    }
+} 
+
+

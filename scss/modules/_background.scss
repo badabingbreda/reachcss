@@ -1,0 +1,5 @@
+@each $name, $value in $coreColors {
+    .#{$prefix}bg--#{$name} {
+        background-color: #{$value};
+    }
+}

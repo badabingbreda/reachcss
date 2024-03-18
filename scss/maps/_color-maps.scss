@@ -1,0 +1,34 @@
+
+$context : (
+    success : $success-hex,
+    danger : $danger-hex,
+    warning : $warning-hex,
+    info : $warning-hex,
+);
+    
+    
+$coreColors: (
+    action: var(--action),
+    primary: var(--primary),
+    secondary: var(--secondary),
+    accent: var(--accent),
+    base: var(--base),
+    shade: var(--shade),
+    black: var(--black),
+    white: var(--white)
+);
+
+$contextColors: (
+    success: var(--success),
+    danger: var(--danger),
+    warning: var(--warming),
+    info: var(--info)
+);
+    
+$colors : (
+    actionSet : (
+        action: $action-hex,
+        action-hover: hsl( $action-hover-h, $action-hover-s, $action-l * $action-hover-l),
+        
+    )
+);

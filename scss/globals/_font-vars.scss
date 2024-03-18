@@ -1,0 +1,26 @@
+@use "sass:math";
+@use 'sass:list';
+@use 'sass:map';
+
+// $font-size-small    : clamp(0.8rem, -0.08vw + 0.82rem, 0.75rem) !default;
+// $font-size-base     : clamp(1rem, 0vw + 1rem, 1rem) !default;
+// $font-size-medium   : clamp(1.25rem, 0.13vw + 1.22rem, 1.33rem) !default; 
+// $font-size-large    : clamp(1.56rem, 0.33vw + 1.48rem, 1.78rem) !default;
+// $font-size-xlarge   : clamp(1.95rem, 0.64vw + 1.79rem, 2.37rem) !default;
+// $font-size-xxlarge  : clamp(2.44rem, 1.1vw + 2.17rem, 3.16rem) !default;
+
+
+$type-base-min: 16px !default;
+$type-base-max: 19px !default;
+
+$type-scale-min: 1.2 !default;
+$type-scale-max: 1.333 !default;
+
+$type-steps: "small", "base", "medium", "large", "xlarge", "xxlarge" !default;
+$type-base-index: list.index( $type-steps, "base" );
+
+// mobile size for clamp function
+$default-min-bp : map.get( $media-breakpoints , "s" );
+
+// desktop size for clamp function
+$default-max-bp : map.get( $media-breakpoints , "m" );

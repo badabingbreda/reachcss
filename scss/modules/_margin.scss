@@ -1,0 +1,36 @@
+@use 'sass:list';
+
+@for $i from 1 through length($spacing-steps) {
+    $step: list.nth($spacing-steps, $i);
+    .#{$prefix}margin-#{$step} {
+        margin: var(--spacing-#{$step});
+    }
+} 
+
+@for $i from 1 through length($spacing-steps) {
+    $step: list.nth($spacing-steps, $i);
+    .#{$prefix}margin-top-#{$step} {
+        margin-top: var(--spacing-#{$step});
+    }
+}
+
+@for $i from 1 through length($spacing-steps) {
+    $step: list.nth($spacing-steps, $i);
+    .#{$prefix}margin-bottom-#{$step} {
+        margin-bottom: var(--spacing-#{$step});
+    }
+} 
+
+@for $i from 1 through length($spacing-steps) {
+    $step: list.nth($spacing-steps, $i);
+    .#{$prefix}margin-left-#{$step} {
+        margin-left: var(--spacing-#{$step});
+    }
+} 
+
+@for $i from 1 through length($spacing-steps) {
+    $step: list.nth($spacing-steps, $i);
+    .#{$prefix}margin-right-#{$step} {
+        margin-right: var(--spacing-#{$step});
+    }
+} 

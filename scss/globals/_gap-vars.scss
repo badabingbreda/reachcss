@@ -1,0 +1,10 @@
+@use "sass:math";
+@use 'sass:list';
+@use 'sass:map';
+
+$gap-base : 16px !default;   // multiplyer for px font-size
+
+$gap-scale : 1.5 !default;
+
+$gap-steps : 'xs' , 's' , 'm' , 'l' , 'xl' , 'xxl';
+$gap-base-index : list.index( $gap-steps, "m" );

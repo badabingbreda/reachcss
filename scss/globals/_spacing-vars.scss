@@ -1,0 +1,17 @@
+@use "sass:math";
+@use 'sass:list';
+@use 'sass:map';
+
+$spacing-base-min : 2.4 !default;   // multiplyer for px font-size
+$spacing-base-max : 3 !default;     // multiplier for px font-size
+
+$spacing-scale-min : 1.3 !default;
+$spacing-scale-max : 1.5 !default;
+
+$spacing-steps : 'xs' , 's' , 'm' , 'l' , 'xl' , 'xxl';
+$spacing-base-index : list.index( $spacing-steps, "m" );
+
+$spacing-fixed-base     : 1   !default;
+$spacing-fixed-scale    : 2   !default;
+
+$spacing-fixed-base-index : list.index( $spacing-steps, "l" );
