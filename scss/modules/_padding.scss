@@ -1,35 +1,35 @@
-@use 'sass:list';
+// @use 'sass:list';
 
 @for $i from 1 through length($spacing-steps) {
-    $step: list.nth($spacing-steps, $i);
+    $step: nth($spacing-steps, $i);
     .#{$prefix}padding-#{$step} {
         padding: var(--spacing-#{$step});
     }
 } 
 
 @for $i from 1 through length($spacing-steps) {
-    $step: list.nth($spacing-steps, $i);
+    $step: nth($spacing-steps, $i);
     .#{$prefix}padding-top-#{$step} {
         padding-top: var(--spacing-#{$step});
     }
 }
 
 @for $i from 1 through length($spacing-steps) {
-    $step: list.nth($spacing-steps, $i);
+    $step: nth($spacing-steps, $i);
     .#{$prefix}padding-bottom-#{$step} {
         padding-bottom: var(--spacing-#{$step});
     }
 } 
 
 @for $i from 1 through length($spacing-steps) {
-    $step: list.nth($spacing-steps, $i);
+    $step: nth($spacing-steps, $i);
     .#{$prefix}padding-left-#{$step} {
         padding-left: var(--spacing-#{$step});
     }
 } 
 
 @for $i from 1 through length($spacing-steps) {
-    $step: list.nth($spacing-steps, $i);
+    $step: nth($spacing-steps, $i);
     .#{$prefix}padding-right-#{$step} {
         padding-right: var(--spacing-#{$step});
     }

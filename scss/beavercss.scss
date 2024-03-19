@@ -6,6 +6,7 @@ $framework-beaver : 1 !default;
 
 @import 'helpers/functions';
 
+// load all the variables, grouped per section
 @import 'globals/breakpoint-vars';
 @import 'globals/color-vars';
 @import 'globals/font-vars';
@@ -14,10 +15,13 @@ $framework-beaver : 1 !default;
 @import 'globals/gap-vars';
 @import 'globals/utility-vars';
 
+// maps
 @import 'maps/color-maps';
 
+// mixins
 @import 'mixins/mixins';
 
+// modules
 @import 'modules/defaults';
 @import 'modules/background';
 @import 'modules/rounded';
@@ -28,7 +32,7 @@ $framework-beaver : 1 !default;
 @import 'modules/width';
 @import 'modules/utility';
 
-// possibly Beaver related styles
+// // possibly Beaver related styles
 @import 'beaver/button';
 @import 'beaver/box';
 @import 'beaver/photo';

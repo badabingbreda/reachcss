@@ -1,0 +1,13 @@
+{
+    "name": "didou/beavercss",
+    "type": "project",
+    "require": {
+        "scssphp/scssphp": "^1.12"
+    },
+    "authors": [
+        {
+            "name": "badabingbreda",
+            "email": "didou@badabing.nl"
+        }
+    ]
+}

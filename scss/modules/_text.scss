@@ -1,5 +1,5 @@
-@use 'sass:list';
-@use 'sass:math';
+// @use 'sass:list';
+// @use 'sass:math';
 
 /**
  * Font styles
@@ -7,10 +7,10 @@
 
 // FONT STYLES
 @for $i from 1 through length($type-steps) {
-    $step: list.nth($type-steps, $i);
+    $step: nth($type-steps, $i);                                // list-nth
     $power: $i - $type-base-index;
-    $min: $type-base-min * math.pow($type-scale-min, $power);
-    $max: $type-base-max * math.pow($type-scale-max, $power);
+    $min: $type-base-min * pow($type-scale-min, $power);
+    $max: $type-base-max * pow($type-scale-max, $power);
     .#{$prefix}font-size-#{$step} {
         font-size: var(--font-size-#{$step});
     }

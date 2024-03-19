@@ -1,12 +1,12 @@
-@use 'sass:math';
-@use 'sass:list';
+// @use 'sass:math';
+// @use 'sass:list';
 
 /**
  * rounded styles
  */
 
 @for $i from 1 through length($radius-steps) {
-    $step: list.nth($radius-steps, $i);
+    $step: nth($radius-steps, $i);
     .#{$prefix}rounded-#{$step} {
         border-radius: var(--rounded-#{$step});
     }

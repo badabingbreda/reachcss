@@ -1,9 +1,9 @@
-@use "sass:math";
-@use 'sass:list';
-@use 'sass:map';
+//@use "sass:math";
+//@use 'sass:list';
+//@use 'sass:map';
 
 $radius-base : 1rem !default;
 $radius-scale : 1.5 !default;
 
-$radius-steps : 'xs' , 's' , 'm' , 'l' , 'xl' , 'xxl';
-$radius-base-index : list.index( $radius-steps, "m" );
+$radius-steps : ('xs' , 's' , 'm' , 'l' , 'xl' , 'xxl');
+$radius-base-index : 3;
