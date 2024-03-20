@@ -27,10 +27,26 @@ class BeaverParser {
 
         require_once( BEAVERCSS_DIR . 'vendor/autoload.php' );
 
+        /**
+         * Instanciate a new Compiler
+         */
         $compiler = new Compiler();
-        // set import paths
+
+        /**
+         * set import paths
+         */
         $compiler->setImportPaths( BEAVERCSS_DIR . 'scss/' );
 
+        /**
+         * add variables at this point. 
+         * If missing !default will be used in scss file(s).
+         **/ 
+        $compiler->addVariables( [ 'type-base-min' => '20px' ] );
+
+        /**
+         * Compile to string and get css
+         * !!todo: add try-catch for error handling
+         */
 
         $css = $compiler->compileString( "@import \"beavercss.scss\";" )->getCss();
 
