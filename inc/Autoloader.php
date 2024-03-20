@@ -30,7 +30,7 @@ class Autoloader {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const AUTOLOADED_NAMESPACE_PREFIX = 'BeaverCSS\\';
+	const AUTOLOADED_NAMESPACE_PREFIX = __NAMESPACE__ . '\\';
 
 	/**
 	 * Loads the class file if it is in the autoloaded namespace.
@@ -55,7 +55,6 @@ class Autoloader {
 	 */
 	private function is_class_in_autoloaded_namespace( $class ) {
 		$prefix_length = strlen( self::AUTOLOADED_NAMESPACE_PREFIX );
-
 		return 0 === strncmp( self::AUTOLOADED_NAMESPACE_PREFIX, $class, $prefix_length );
 	}
 

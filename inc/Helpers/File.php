@@ -55,7 +55,8 @@ final class File {
 		$upload_dir = \wp_upload_dir();
 
 		$settings = array(
-            'upload_dir' => $upload_dir,
+			'baseurl'	=> $upload_dir[ 'baseurl' ],
+            'upload_dir' => $upload_dir[ 'basedir' ],
             'cache_dir'	 => $upload_dir['basedir'] . '/'. $dirname,
 		);
 

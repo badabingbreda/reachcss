@@ -1,5 +1,6 @@
 <?php
 namespace BeaverCSS\Helpers;
+use BeaverCSS\Helpers\File;
 
 class ScriptStyle {
 
@@ -17,7 +18,9 @@ class ScriptStyle {
      * @return void
      */
     public static function beavercss() {
-        wp_enqueue_style( 'beavercss', BEAVERCSS_URL . 'css/beavercss.min.css' , false, BEAVERCSS_VERSION, 'all' );
+
+        $settings = File::dir_settings( 'beavercss' );
+        wp_enqueue_style( 'beavercss',  $settings['baseurl'] . '/beavercss/beavercss.css' , false, BEAVERCSS_VERSION, 'all' );
     }
     
 

@@ -34,8 +34,17 @@ class BeaverParser {
 
         $css = $compiler->compileString( "@import \"beavercss.scss\";" )->getCss();
 
+        // prepend with datetime stamp
+
+        $css = self::datetimestamp() . $css;
+
         // create the directory if not already exists
         File::create_dir( self::$directory );
         File::write_file( self::$directory ,  self::$filename . '.css' , $css );
+    }
+
+    private static function datetimestamp() {
+
+        return "/** BeaverCSS Version " . BEAVERCSS_VERSION . ", Generated on: " . date( 'Y-m-d H:i:s' ) . " **/\r\n";
     }
 }
