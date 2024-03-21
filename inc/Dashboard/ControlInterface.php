@@ -3,14 +3,34 @@ namespace BeaverCSS\Dashboard;
 
 interface ControlInterface {
 
-    public function __construct( $config = [] );
+    public function __construct( $settings = [] );
 
-    public static function outputIf( $value );
+    public function outputIf( $value );
 
-    public static function enqueue_js();
+    public function enqueue_js();
 
-    public static function enqueue_css();
+    public function enqueue_css();
 
-    public static function render( $settings );
+    public function prepare();
+    
+    /**
+     * __
+     * 
+     * return string with control html
+     *
+     * @param  mixed $settings
+     * @return void
+     */
+    public function __( );
+    
+    /**
+     * _e
+     * 
+     * echo control html
+     *
+     * @param  mixed $settings
+     * @return void
+     */
+    public function _e( );
 
 }

@@ -4,9 +4,13 @@ use BeaverCSS\Helpers\ScriptStyle;
 use BeaverCSS\BeaverParser;
 use BeaverCSS\Dashboard\Dashboard;
 
+use BeaverCSS\Dashboard\Section;
 use BeaverCSS\Dashboard\Controls\ControlColor;
+use BeaverCSS\Dashboard\Controls\ControlDropdown;
+use BeaverCSS\Dashboard\Controls\ControlMultiCheckbox;
 use BeaverCSS\Dashboard\Controls\ControlSubmit;
 use BeaverCSS\Dashboard\Controls\ControlSwitch;
+use BeaverCSS\Dashboard\Controls\ControlText;
 
 class Init {
 

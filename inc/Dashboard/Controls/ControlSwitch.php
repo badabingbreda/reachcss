@@ -5,26 +5,28 @@ use BeaverCSS\Dashboard\Control;
 
 class ControlSwitch extends Control {
 
-    private static $defaults = [
+    public $defaults = [
         "name" => "",
         "state" => false,
         "class" => null,
         "target" => null,
         "classtoggle" => null,
+        "event" => 'click',
     ];
 
-    public static function render( $settings ) {
-        $settings = self::parse_settings( $settings , self::$defaults );
+    public function __(  ) {
+        $settings = $this->settings;
 
-        $class = self::outputIf( $settings[ 'class' ] );
+        $class = $this->outputIf( $settings[ 'class' ] );
         $state = $settings[ "state" ] ? "checked" : "";
 
-        $target_element = $settings[ 'target' ] ? self::attribute_target_element( $settings[ 'target' ] ) : '';
-
-        echo <<<EOL
+        return <<<EOL
         <div class="control-field switch {$class}"
-        {$target_element}
-        data-field-id="{$settings['name']}">
+        data-control-type="switch"
+        data-switch-target="{$settings['target']}"
+        data-switch-classtoggle="{$settings['classtoggle']}"
+        data-switch-event="{$settings['event']}"
+        data-switch-laststate="{$settings['state']}">
             <label>
                 <input type="checkbox" 
                     id="{$settings[ "name" ]}" 
@@ -35,22 +37,10 @@ class ControlSwitch extends Control {
         </div>
         EOL;
 
-        if ( $settings[ 'target' ] && $settings[ 'name' ] ) echo self::add_js_listener( $settings );
     }
-
+    
     private static function attribute_target_element( $target ) {
         return " data-target-element=\"{$target}\"";
-    }
-
-    private static function add_js_listener( $settings ) {
-        return <<<EOL
-            <script>
-                document.querySelector( '.control-field[data-field-id={$settings['name']}] input' ).addEventListener( 'click' , 
-                function( event ) {
-                    document.querySelector( '{$settings['target']}' ).classList.toggle( '{$settings['classtoggle']}' );
-                });
-            </script>        
-        EOL;
     }
 
 }

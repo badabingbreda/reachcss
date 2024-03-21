@@ -5,22 +5,24 @@ use BeaverCSS\Dashboard\Control;
 
 class ControlSubmit extends Control {
 
-    private static $defaults = [
+    public $defaults = [
         "name" => "",
         "type" => "submit",
         "value" => "Update",
         "class" => null,
     ];
 
-    public static function render( $settings ) {
-        $settings = self::parse_settings( $settings , self::$defaults );
+    public function __(  ) {
+        $settings = $this->settings;
 
 
-        echo <<<EOL
+        return <<<EOL
+        <div>
         <input type="{$settings['type']}" 
         name="update" 
         class="{$settings['class']}" 
         value="{$settings['value']}" />
+        </div>
         EOL;
     }
 

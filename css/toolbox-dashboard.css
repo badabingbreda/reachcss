@@ -95,3 +95,7 @@
 .CodeMirror-scroll {
   max-height: 90vh;
 }
+
+.hidden {
+  display:none;
+}
