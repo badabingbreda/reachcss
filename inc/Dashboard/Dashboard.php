@@ -146,6 +146,7 @@ class Dashboard {
 		// printf( $tabtemplate, 'tools', esc_attr__( 'Tools' , 'toolbox') );
 
 		$tabs = apply_filters( 'dashboard_settings_tabs', [] );
+
 		foreach ( $tabs as $tab) {
 			printf( $tabtemplate , $tab['slug'], $tab['name'] );
 		}
