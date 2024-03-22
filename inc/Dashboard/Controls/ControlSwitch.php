@@ -27,7 +27,7 @@ class ControlSwitch extends Control {
         $class = $this->outputIf( $settings[ 'class' ] );
         $state = $settings[ "state" ] ? "checked" : "";
 
-        return $output .= $this->controlwrapper(
+        return $output .= 
         <<<EOL
         <div class="control-field switch {$class}"
         data-control-type="switch"
@@ -43,8 +43,7 @@ class ControlSwitch extends Control {
                 <span class="slider round"></span>
             </label>		
         </div>
-        EOL
-        );
+        EOL;
 
     }
     

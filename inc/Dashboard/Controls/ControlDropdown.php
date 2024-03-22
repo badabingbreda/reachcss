@@ -35,15 +35,14 @@ class ControlDropdown extends Control {
         endforeach;
 
 
-        return $output .= $this->controlwrapper(
+        return $output .= 
         <<<EOL
         <div class="control-field dropdown{$class}"  data-control-type="dropdown">
             <select name="{$settings[ "id" ]}" id="{$settings[ "id" ]}">
                 {$options}
             </select>
         </div>
-        EOL
-    );
+        EOL;
 
     }
 

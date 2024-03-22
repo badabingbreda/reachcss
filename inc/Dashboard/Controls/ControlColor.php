@@ -30,7 +30,7 @@ class ControlColor extends Control {
     public function __( $output = '' ) {
         $settings = $this->settings;
 
-        return $output .= $this->controlwrapper(
+        return  
         <<<EOL
         <div class="control-field color" data-control-type="color">
         <input 
@@ -41,7 +41,7 @@ class ControlColor extends Control {
         value="{$settings['value']}" 
         data-coloris>
         </div>
-        EOL);
+        EOL;
 
     }
 

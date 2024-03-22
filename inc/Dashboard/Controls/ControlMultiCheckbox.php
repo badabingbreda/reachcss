@@ -36,7 +36,7 @@ class ControlMultiCheckbox extends Control {
                         $option['id']);
         }
 
-        return $output .= $this->controlwrapper($return);
+        return $output .= $return;
         
     }
 

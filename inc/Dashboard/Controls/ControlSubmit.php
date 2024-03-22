@@ -23,7 +23,7 @@ class ControlSubmit extends Control {
         $settings = $this->settings;
 
 
-        return $output .= $this->controlwrapper(
+        return $output .= 
         <<<EOL
         <div>
         <input type="{$settings['type']}" 
@@ -32,8 +32,7 @@ class ControlSubmit extends Control {
         class="{$settings['class']}" 
         value="{$settings['value']}" />
         </div>
-        EOL
-        );
+        EOL;
     }
 
 }

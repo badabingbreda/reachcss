@@ -25,6 +25,8 @@ class BeaverParser {
 
     public static function compile() {
 
+        $success = false;
+
         require_once( BEAVERCSS_DIR . 'vendor/autoload.php' );
 
         /**
@@ -52,17 +54,21 @@ class BeaverParser {
 
          try {
              $css = $compiler->compileString( "@import \"beavercss.scss\";" )->getCss();
+             $success = true;
          } catch (\Exception $e) {
             $css = "somthing didn't go as planned...";
+            $success = false;
          }
 
-        // prepend with datetime stamp
+         if ( $success ) {
 
-        $css = self::datetimestamp() . $css;
-
-        // create the directory if not already exists
-        File::create_dir( self::$directory );
-        File::write_file( self::$directory ,  self::$filename . '.css' , $css );
+            // prepend with datetime stamp
+             $css = self::datetimestamp() . $css;
+             // create the directory if not already exists
+             File::create_dir( self::$directory );
+             File::write_file( self::$directory ,  self::$filename . '.css' , $css );
+         }
+         return $success;
     }
 
     private static function datetimestamp() {

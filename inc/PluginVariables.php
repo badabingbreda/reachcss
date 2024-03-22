@@ -34,6 +34,11 @@ class PluginVariables {
                 'type-base-max' => '19px',
                 'type-scale-min' => 1.2,
                 'type-scale-max' => 1.333,
+                'media-breakpoint-s' => '640px',
+                'media-breakpoint-m' => '960px',
+                'media-breakpoint-l' => '1200px',
+                'media-breakpoint-xl' => '1600px',
+
             ]
         );
     }

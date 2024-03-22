@@ -25,7 +25,7 @@ class ControlText extends Control {
     
         $class = $this->outputIf( $settings[ 'class' ] );
     
-        return $output .= $this->controlwrapper(
+        return  
         <<<EOL
         <div class="control-field text{$class}"
         data-control-type="text">
@@ -37,7 +37,6 @@ class ControlText extends Control {
         
         >
         </div>
-        EOL
-        );
+        EOL;
     }
 }

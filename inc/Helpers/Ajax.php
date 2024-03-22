@@ -23,11 +23,11 @@ class Ajax {
         // make sure to use the altered variables
         add_filter( 'beavercss/variables' , function( $variables ) use ( $_PUT ) { return array_merge( $variables , $_PUT ); } , 100 , 1 );
 
-        BeaverParser::compile();
+        $success = BeaverParser::compile();
 
         $time = $timer->get_time();
 
-        echo wp_json_encode( [ 'data' => 'that worked' , 'post' => $_PUT , 'time' => $time ] );
+        echo wp_json_encode( [  'success' => $success === true ? true : false , 'time' => $time ] );
         wp_die();
     }
 

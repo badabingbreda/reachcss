@@ -65,9 +65,7 @@ beaverCSS.prototype = {
         document.querySelector( '.dashboard-save-changes' ).addEventListener( 'click' , function(e) {
             if ( !this.sending ) {
                 // do not allow new clicks while sending
-                this.sending = true;
                 this.collect();
-                this.sending = false;
 
             }
         }.bind( this ) );
@@ -107,6 +105,8 @@ beaverCSS.prototype = {
             });
         });
 
+        this.sending = true;
+
         // use fetch
         fetch( `/wp-admin/admin-ajax.php?action=beavercss_update`,
         {
@@ -119,10 +119,12 @@ beaverCSS.prototype = {
         } )
         .then( ( response ) => response.json() )
         .then( ( data ) => {
-                console.log(data.post );
-                alert( `took me only ${data.time} seconds` );
+                this.sending = false;
+                let success = data.success ? 'successful!' : 'NOT successful';
+                alert( `took me only ${data.time} seconds and results was ${success}` );
         })
         .catch( (error) => {
+            this.sending = false;
             console.log( 'I messed up ' , error );
         } );
 

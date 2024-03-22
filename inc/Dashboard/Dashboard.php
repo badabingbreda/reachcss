@@ -29,6 +29,9 @@ class Dashboard {
 		'title' => 'DASHBOARD TITLE',	// in the sidebar menu
 		'menu_title' => 'DASHBOARD MENU TITLE',	// in the sidebar menu
 		'capability' => 'delete_users',
+		'type' => 'submenu',
+		'icon_url' => null,
+		'position' => null,
 	];
 
 
@@ -123,7 +126,29 @@ class Dashboard {
 		$menu_slug		= $this->settings['id'];
 		$callback 		= array( $this , 'render_options' );
 
-		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $callback );
+		if ( $this->settings[ 'type' ] === 'submenu' ) {
+			add_submenu_page( 
+				$parent_slug, 
+				$page_title, 
+				$menu_title, 
+				$capability, 
+				$menu_slug, 
+				$callback 
+			);
+		} elseif ( $this->settings[ 'type' ] === 'menu' ) {
+			add_menu_page( 
+				$page_title,
+				$menu_title,
+				$capability,
+				$menu_slug,
+				$callback,
+				$this->settings[ 'icon_url' ],
+				$this->settings[ 'position' ]
+			);
+
+		}
+
+
 
 	}
 
