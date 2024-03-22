@@ -5,10 +5,17 @@ use BeaverCSS\Dashboard\Control;
 
 class ControlColor extends Control {
 
+    public $type = 'color';
+
     public $defaults = [
-        "name" => "",
+        "id" => "",
+        "label" => "",
         "value" => "green",
         "class" => null,
+        "dashboard" => null,
+        "tab" => null,
+        "section" => null,
+        "priority" => 10,
     ];
 
     public function enqueue_css() {
@@ -20,20 +27,22 @@ class ControlColor extends Control {
     }
 
 
-    public function __( ) {
+    public function __( $output = '' ) {
         $settings = $this->settings;
 
-        return <<<EOL
+        return $output .= $this->controlwrapper(
+        <<<EOL
         <div class="control-field color" data-control-type="color">
         <input 
         type="text" 
         class="{$settings['class']}"
-        id="{$settings['name']}" 
-        name="{$settings['name']}" 
+        id="{$settings['id']}" 
+        name="{$settings['id']}"
         value="{$settings['value']}" 
         data-coloris>
         </div>
-        EOL;
+        EOL);
+
     }
 
 }

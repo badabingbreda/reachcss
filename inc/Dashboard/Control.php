@@ -3,6 +3,8 @@ namespace BeaverCSS\Dashboard;
 
 abstract class Control implements ControlInterface {
 
+    public $type;
+
     public $defaults = [];
 
     public $settings = [];
@@ -24,6 +26,13 @@ abstract class Control implements ControlInterface {
         $this->settings = $this->parse_settings( $settings , $this->defaults );
         // maybe enqueue scripts and styles
         $this->scripts();
+        if ( $this->set_and_value( 'dashboard') && $this->set_and_value( 'tab' ) && $this->set_and_value( 'priority' ) ) {
+            add_filter( 'beavercss/dashboard/' . $this->settings[ 'dashboard' ] . '/tabs/' . $this->settings[ 'tab' ] . '/controls' , array($this , '__' ) , $this->settings[ 'priority' ] , 1 );
+        }
+    }
+
+    private function set_and_value( $key ) {
+        return isset( $this->settings[ $key ] ) && $this->settings[ $key ];
     }
     
     /**
@@ -89,8 +98,17 @@ abstract class Control implements ControlInterface {
      *
      * @return void
      */
-    public function __( ) {
-        return 'Control render output';
+    public function __( $output ) {
+        return $this->controlwrapper( $output );
+    }
+
+    public function controlwrapper( $output ) {
+        return <<<EOL
+            <div class="controlwrapper">
+                <div class="label">{$this->settings['label']}</div>
+                <div class="control">{$output}</div>
+            </div>
+        EOL;
     }
     
     /**
@@ -100,8 +118,8 @@ abstract class Control implements ControlInterface {
      *
      * @return void
      */
-    public function _e( ) {
-        echo $this->__();
+    public function _e( $output ) {
+        echo $this->__( $output );
     }
 
     public function enqueue_js() {  }

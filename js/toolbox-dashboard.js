@@ -17,6 +17,9 @@
     });
 })(jQuery);
 
+// hex to HSL, implement later
+// https://gist.github.com/xenozauros/f6e185c8de2a04cdfecf
+
 beaverCSS = function ( settings ) {
     this.settings = settings;
 }
@@ -30,11 +33,23 @@ beaverCSS.prototype = {
         const _this = this;
 
         this.add_action( 'init' , this.initSwitch.bind( _this ) , 10 );
+        this.add_action( 'init' , this.addSaveChangesListener.bind( this ) , 10 );
+        this.add_action( 'init' , this.setColorisSettings.bind( this ) , 10 );
+
         this.add_filter( 'getControlValue' , this.getControlSwitchValue.bind( this ) , 10 );
         this.add_filter( 'getControlValue' , this.getControlColorValue.bind( this ) , 10 );
         this.add_filter( 'getControlValue' , this.getControlTextValue.bind( this ) , 10 );
 
+        
         this.do_action( 'init' , this.settings );
+    },
+    
+    setColorisSettings : function( settings ) {
+        if ( typeof window.Coloris !== 'function' ) return;
+        window.Coloris({
+            themeMode: 'dark',
+            alpha: false
+        });
     },
     
     initSwitch : function( settings ) {
@@ -44,6 +59,18 @@ beaverCSS.prototype = {
                 elem.addEventListener( 'change' , function (e) { this.handleSwitchClick( e ); }.bind( this ) );
             }.bind( this )
         );
+    },
+
+    addSaveChangesListener : function( settings ) {
+        document.querySelector( '.dashboard-save-changes' ).addEventListener( 'click' , function(e) {
+            if ( !this.sending ) {
+                // do not allow new clicks while sending
+                this.sending = true;
+                this.collect();
+                this.sending = false;
+
+            }
+        }.bind( this ) );
     },
 
     handleSwitchClick : function ( e ) {
@@ -61,11 +88,11 @@ beaverCSS.prototype = {
             classtoggle = switchElem.dataset.switchClasstoggle,
             laststate = switchElem.dataset.switchLaststate;
         
-            if ( laststate ) { 
-                document.querySelector( target ).classList.remove( classtoggle );
-            } else {
-                document.querySelector( target ).classList.add( classtoggle );
-            }
+        if ( laststate ) { 
+            document.querySelector( target ).classList.remove( classtoggle );
+        } else {
+            document.querySelector( target ).classList.add( classtoggle );
+        }
     },
 
     collect : function() {
@@ -80,8 +107,36 @@ beaverCSS.prototype = {
             });
         });
 
-        alert( JSON.stringify(settings) );
+        // use fetch
+        fetch( `/wp-admin/admin-ajax.php?action=beavercss_update`,
+        {
+            method: 'POST',
+            headers: { 
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: this.asFormData( settings ),
+        } )
+        .then( ( response ) => response.json() )
+        .then( ( data ) => {
+                console.log(data.post );
+                alert( `took me only ${data.time} seconds` );
+        })
+        .catch( (error) => {
+            console.log( 'I messed up ' , error );
+        } );
+
+
     },
+
+	asFormData : function( data ) {
+		let formData = '';
+		for (var key in data ) {
+			formData += `${key}=${data[key]}&`
+		}
+		return formData;
+
+	},    
 
     getControlSwitchValue : function ( value , elem, type ) {
         // return the value early
@@ -98,7 +153,7 @@ beaverCSS.prototype = {
     getControlTextValue : function ( value , elem, type ) {
         // return the value early
         if ( type !== 'text' ) return value;
-        return { [elem.querySelector( 'input' ).id] : `"${elem.querySelector( 'input' ).value}"` };
+        return { [elem.querySelector( 'input' ).id] : elem.querySelector( 'input' ).value };
     },
 
 

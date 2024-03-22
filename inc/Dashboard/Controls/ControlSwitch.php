@@ -5,22 +5,30 @@ use BeaverCSS\Dashboard\Control;
 
 class ControlSwitch extends Control {
 
+    public $type = 'switch';
+
     public $defaults = [
-        "name" => "",
+        "id" => "",
+        "label" => "",
         "state" => false,
         "class" => null,
         "target" => null,
         "classtoggle" => null,
         "event" => 'click',
+        "dashboard" => null,
+        "tab" => null,
+        "section" => null,
+        "priority" => 10,
     ];
 
-    public function __(  ) {
+    public function __( $output = '' ) {
         $settings = $this->settings;
 
         $class = $this->outputIf( $settings[ 'class' ] );
         $state = $settings[ "state" ] ? "checked" : "";
 
-        return <<<EOL
+        return $output .= $this->controlwrapper(
+        <<<EOL
         <div class="control-field switch {$class}"
         data-control-type="switch"
         data-switch-target="{$settings['target']}"
@@ -29,13 +37,14 @@ class ControlSwitch extends Control {
         data-switch-laststate="{$settings['state']}">
             <label>
                 <input type="checkbox" 
-                    id="{$settings[ "name" ]}" 
-                    name="{$settings[ "name" ]}" 
+                    id="{$settings[ "id" ]}" 
+                    name="{$settings[ "id" ]}" 
                     {$state} />
                 <span class="slider round"></span>
             </label>		
         </div>
-        EOL;
+        EOL
+        );
 
     }
     

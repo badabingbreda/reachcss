@@ -10,7 +10,9 @@ class Tab implements TabInterface {
     protected $settings = [];
 
     public $defaults = [
-        'title' => 'Main title',
+        'id' => null,
+        'dashboard' => null,
+        'title' => null,
         'menu_title' => 'Menu Title',
         'menu_slug' => 'menu-slug',
         'priority' => 10,
@@ -28,11 +30,11 @@ class Tab implements TabInterface {
 
     public function init( $settings ) {
         $this->settings = $this->parse_settings( $settings , $this->defaults );
-        add_filter( 'beavercss/dashboard/' . $this->settings[ 'page' ] . '/tabs' , array( $this , 'get_tab_settings' ) , $this->settings[ 'priority' ] );
+        add_filter( 'beavercss/dashboard/' . $this->settings[ 'dashboard' ] . '/tabs' , array( $this , 'get_tab_settings' ) , $this->settings[ 'priority' ] );
     }
 
     public function remove() {
-        remove_filter( 'beavercss/dashboard/' . $this->settings[ 'page' ] . '/tabs' , array( $this , 'get_tab_settings' ) , $this->settings[ 'priority' ] );
+        remove_filter( 'beavercss/dashboard/' . $this->settings[ 'dashboard' ] . '/tabs' , array( $this , 'get_tab_settings' ) , $this->settings[ 'priority' ] );
         return $this;
     }
 
@@ -51,13 +53,39 @@ class Tab implements TabInterface {
             $defaults);
     }
 
-    public function get_tab_settings( ) {
-        return [
-            'title' => $this->title,
-            'menu_title' => $this->menu_title,
-            'menu_slug' => $this->menu_slug,
-            'content' => $this->content
+    public function get_tab_settings( $tabs ) {
+
+        $tabs[] = [
+            'title' => $this->settings['title'],
+            'menu_title' => $this->settings['menu_title'],
+            'menu_slug' => $this->settings['menu_slug'],
+            'content' => $this->tab_start() . $this->tab_content() . $this->tab_end()
         ];
+        return $tabs;
+    }
+
+    private function tab_content() {
+        $content = apply_filters( 'beavercss/dashboard/' . $this->settings[ 'dashboard' ] . '/tabs/' . $this->settings[ 'id' ] . '/controls' , '' );
+        return $content;
+    }
+
+    private function tab_start() {
+
+        $title = $this->settings[ 'title' ] ? "<h3>{$this->settings['title']}</h3>" : "";
+
+        return <<<EOL
+        <div class="jq-tab-content" data-tab="{$this->settings['menu_slug']}">
+        <form id="adminoptions-{$this->settings['menu_slug']}" action="#" method="post">
+            {$title}
+        EOL;
+    }
+
+    private function tab_end() {
+        return <<<EOL
+            </form>
+        </div>
+        EOL;
+
     }
     
     /**

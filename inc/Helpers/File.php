@@ -43,7 +43,18 @@ final class File {
 	    \file_put_contents( $settings[ 'cache_dir' ] . '/' .  $filename  , $stream );
 		\chmod( $settings[ 'cache_dir' ] . '/' . $filename , 0755 );
 
-	}    
+	}  
+	
+	public static function get_file( $dirname , $filename ) {
+
+		$settings = self::dir_settings( $dirname );
+
+		if ( \file_exists( $settings[ 'cache_dir' ] . '/' .  $filename ) ) {
+			return file_get_contents( $settings[ 'cache_dir' ] . '/' .  $filename );
+		} else {
+			return null;
+		}
+	}
 
 	/**
 	 * Get the wp_upload_dir and set our cache dir

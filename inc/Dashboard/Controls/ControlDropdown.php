@@ -5,14 +5,21 @@ use BeaverCSS\Dashboard\Control;
 
 class ControlDropdown extends Control {
 
+    public $type = 'dropdown';
+
     public $defaults = [
-        "name" => "",
+        "id" => "",
+        "label" => "",
         "options" => [],
         "selected_value" => "",
         "class" => null,
+        "dashboard" => null,
+        "tab" => null,
+        "section" => null,
+        "priority" => 10,
     ];
 
-    public function __( ) {
+    public function __( $output = '' ) {
         $settings = $this->settings;
 
         $class = $this->outputIf( $settings[ 'class' ] );
@@ -28,13 +35,15 @@ class ControlDropdown extends Control {
         endforeach;
 
 
-        return <<<EOL
+        return $output .= $this->controlwrapper(
+        <<<EOL
         <div class="control-field dropdown{$class}"  data-control-type="dropdown">
-            <select name="{$settings[ "name" ]}" id="{$settings[ "name" ]}">
+            <select name="{$settings[ "id" ]}" id="{$settings[ "id" ]}">
                 {$options}
             </select>
         </div>
-        EOL;
+        EOL
+    );
 
     }
 

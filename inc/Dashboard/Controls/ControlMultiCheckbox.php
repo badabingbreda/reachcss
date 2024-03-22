@@ -5,18 +5,26 @@ use BeaverCSS\Dashboard\Control;
 
 class ControlMultiCheckbox extends Control {
 
+    public $type = 'multicheckbox';
+
     public $defaults = [
-        "name" => "",
+        "id" => "",
+        "label" => "",
         "options" => "",
         "class" => null,
+        "dashboard" => null,
+        "tab" => null,
+        "section" => null,
+        "priority" => 10,
+
 ];
 
-    public function __(  ) {
+    public function __( $output = '' ) {
         $settings = $this->settings;
 
         $return = '';
 
-        $template = '<div data-control-type="multicheckbox"><input type="checkbox" name="'.$settings['name'].'[]" id="'.$settings['name'].'_%s" value="%s" %s %s><label for="'.$settings['name'].'_%s">%s</label></div>';
+        $template = '<div data-control-type="multicheckbox"><input type="checkbox" name="'.$settings['id'].'[]" id="'.$settings['id'].'_%s" value="%s" %s %s><label for="'.$settings['id'].'_%s">%s</label></div>';
 
         foreach ($settings['options'] as $option) {
             $return .= sprintf($template, 
@@ -25,10 +33,10 @@ class ControlMultiCheckbox extends Control {
                         \checked( $option['checked'], true, false ),
                         \disabled( $option['disabled'] , true, false ),
                         $option['value'], 
-                        $option['name']);
+                        $option['id']);
         }
 
-        return $return;
+        return $output .= $this->controlwrapper($return);
         
     }
 

@@ -37,18 +37,24 @@ class BeaverParser {
          */
         $compiler->setImportPaths( BEAVERCSS_DIR . 'scss/' );
 
+        $variables = apply_filters( 'beavercss/variables' , [] );
+
         /**
          * add variables at this point. 
          * If missing !default will be used in scss file(s).
          **/ 
-        $compiler->addVariables( [ 'type-base-min' => '20px' ] );
+        $compiler->addVariables( $variables );
 
         /**
          * Compile to string and get css
          * !!todo: add try-catch for error handling
          */
 
-        $css = $compiler->compileString( "@import \"beavercss.scss\";" )->getCss();
+         try {
+             $css = $compiler->compileString( "@import \"beavercss.scss\";" )->getCss();
+         } catch (\Exception $e) {
+            $css = "somthing didn't go as planned...";
+         }
 
         // prepend with datetime stamp
 

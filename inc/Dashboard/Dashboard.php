@@ -24,7 +24,7 @@ class Dashboard {
 	public $settings = [];
 
 	public $defaults = [
-		'page' => '',
+		'id' => '',
 		'heading' => 'DASHBOARD TITLE',	// main title in dashboard content
 		'title' => 'DASHBOARD TITLE',	// in the sidebar menu
 		'menu_title' => 'DASHBOARD MENU TITLE',	// in the sidebar menu
@@ -39,10 +39,7 @@ class Dashboard {
 	 */
 	public function __construct( $settings = [] ) {
 		$this->settings = $this->parse_settings( $settings , $this->defaults );
-
-		add_action( 'after_setup_theme', array( $this , 'init_hooks' ), 11 );
-
-		add_filter( 'dashboard_settings_tabs', array( $this, 'add_settings_default' ), 10 , 1 );
+		add_action( 'init', array( $this , 'init_hooks' ), 100 );
 	}
 
     /**
@@ -74,7 +71,7 @@ class Dashboard {
 		add_action( 'admin_menu', array( $this , 'add_dashboard_menu' ) );
 
 		// check for save action
-		if ( isset( $_REQUEST['page'] ) && $this->settings['page'] == $_REQUEST['page'] ) {
+		if ( isset( $_REQUEST['page'] ) && $this->settings['id'] == $_REQUEST['page'] ) {
 			add_action( 'admin_enqueue_scripts', array( $this , 'dashboard_styles_scripts' ) );
 			$this->save();
 		}
@@ -123,7 +120,7 @@ class Dashboard {
 		$page_title 	= $this->settings['title'];
 		$menu_title		= $this->settings['menu_title'];
 		$capability		= $this->settings['capability'];
-		$menu_slug		= $this->settings['page'];
+		$menu_slug		= $this->settings['id'];
 		$callback 		= array( $this , 'render_options' );
 
 		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $callback );
@@ -136,7 +133,26 @@ class Dashboard {
 	 */
 	public function render_options() {
 
-		include_once( BEAVERCSS_DIR . 'dashboard/admin-options.php' );
+		$tabs = apply_filters( 'beavercss/dashboard/' . $this->settings[ 'id' ] . '/tabs', [] );
+		?>
+		<div class="adminoptions-options">
+			<div class="adminoptions-heading">
+			<?php $this->render_heading(); ?>
+			</div>
+			<div class="adminoptions-messages">
+				<?php $this->render_update_message(); ?>
+			</div>
+			<div class="jq-tab-wrapper" id="adminoptions-tab">
+				<div class="jq-tab-menu">
+					<?php echo $this->render_settings_tabs(); ?>
+					<?php echo $this->render_submit_button(); ?>
+				</div>
+				<div class="jq-tab-content-wrapper">
+					<?php echo $this->render_forms() ?>
+				</div>
+			</div>
+		</div>
+		<?php		
 	}
 
 	/**
@@ -148,28 +164,20 @@ class Dashboard {
 		$tabtemplate = '<div class="jq-tab-title" data-tab="%s">%s</div>';
 		$tabtemplate_active = '<div class="jq-tab-title" data-tab="%s">%s</div>';
 
-		echo '<div class="jq-tab-menu">';
+		$return = '';
 
-		// printf( $tabtemplate, 'default', esc_attr__( 'Main' , 'toolbox') );
-		// printf( $tabtemplate, 'timber-templates', esc_attr__( 'Timber Templates' , 'toolbox') );
-		// printf( $tabtemplate, 'beaverbuilder', esc_attr__( 'Beaver Builder / Beaver Theme' , 'toolbox') );
-		// printf( $tabtemplate, 'uikit', esc_attr__( 'UIkit' , 'toolbox') );
-		// printf( $tabtemplate, 'cond-filters', esc_attr__( 'Conditional Filters' , 'toolbox') );
-		// printf( $tabtemplate, 'license', esc_attr__( 'License' , 'toolbox') );
-		// printf( $tabtemplate, 'tools', esc_attr__( 'Tools' , 'toolbox') );
-
-		$tabs = apply_filters( 'dashboard_settings_tabs', [] );
+		// get the tabs by running the filter
+		$tabs = apply_filters( 'beavercss/dashboard/' . $this->settings[ 'id' ] . '/tabs', [] );
 
 		foreach ( $tabs as $tab) {
-			printf( $tabtemplate , $tab['slug'], $tab['name'] );
+			$return .= sprintf( $tabtemplate , $tab['menu_slug'], $tab['menu_title'] );
 		}
 
-		echo '</div>';
+		return $return;
 	}
 
-
-	public function add_settings_default( $tabs ) {
-		return array_merge( $tabs , array( array( 'slug' => 'default' , 'name' => esc_attr__( 'Main', 'toolbox' ) ) ) );
+	public function render_submit_button() {
+		return "<button class=\"dashboard-save-changes\">Save Changes</button>";
 	}
 
 	/**
@@ -178,12 +186,14 @@ class Dashboard {
 	 */
 	public function render_forms() {
 
+		// get the tabs by running the filter
+		$tabs = apply_filters( 'beavercss/dashboard/' . $this->settings[ 'id' ] . '/tabs', [] );
 
-		$tabs = apply_filters( 'dashboard_settings_tabs', [] );
+		$return = '';
 		foreach ( $tabs as $tab) {
-			$this->render_form( $tab['slug'] );
+			$return .= $tab[ 'content' ];
 		}
-
+		return $return;
 	}
 
 	/**
@@ -213,9 +223,9 @@ class Dashboard {
 	public function render_form_action( $type = '' ) {
 
 		if ( is_network_admin() ) {
-			echo network_admin_url( '/settings.php?page=' . $this->settings['page'] . '#' . $type );
+			echo network_admin_url( '/settings.php?page=' . $this->settings['id'] . '#' . $type );
 		} else {
-			echo admin_url( '/options-general.php?page=' . $this->settings['page'] . '#' . $type );
+			echo admin_url( '/options-general.php?page=' . $this->settings['id'] . '#' . $type );
 		}
 	}
 
@@ -227,9 +237,9 @@ class Dashboard {
 	public function get_form_action( $type = '' ) {
 
 		if ( is_network_admin() ) {
-			return network_admin_url( '/settings.php?page=' . $this->settings['page'] . '#' . $type );
+			return network_admin_url( '/settings.php?page=' . $this->settings['id'] . '#' . $type );
 		} else {
-			return admin_url( '/options-general.php?page=' . $this->settings['page'] . '#' . $type );
+			return admin_url( '/options-general.php?page=' . $this->settings['id'] . '#' . $type );
 		}
 	}
 
@@ -277,54 +287,6 @@ class Dashboard {
 
 		do_action( 'toolbox_dashboard_on_panel_save' );
 
-	}
-
-	/**
-	 * Helper functions for common input types for the dashboard
-	 * @param  [type] $type  [description]
-	 * @param  [type] $id    [description]
-	 * @param  [type] $value [description]
-	 * @return [type]        [description]
-	 */
-	public function input( $type , $options = [] ) {
-
-		$type 	= esc_html( $type );
-		$options = array_map( 'esc_attr' , $options );
-
-		switch ($type):
-			case "text":
-
-				$options = wp_parse_args( $options ,
-											$this->key_defaults( [ 'value' , 'id' ] )
-				);
-
-				return "<input type=\"{$type}\" id=\"{$options['id']}\" name=\"{$options['id']}\" value=\"{$options['value']}\">";
-
-			break;
-
-			case "checkbox":
-
-				$options = wp_parse_args( $options ,
-											$this->key_defaults( [ 'value' , 'id' , 'checked' ] )
-				);
-
-				return "<input type=\"${type}\" value=\"{$options['value']}\" name=\"{$options['id']}\" id=\"{$options['id']}\" {$options['checked']}>";
-
-			break;
-
-			case "submit":
-
-				$options = wp_parse_args( $options ,
-											$this->key_defaults( [ 'value' ] )
-				);
-
-				return "<input type=\"${type}\" name=\"update\" class=\"button-primary\" value=\"{$options['value']}\" />
-";
-			break;
-
-		endswitch;
-
-		return void;
 	}
 
 	/**

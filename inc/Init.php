@@ -1,8 +1,11 @@
 <?php
 namespace BeaverCSS;
+use BeaverCSS\PluginVariables;
 use BeaverCSS\PluginDashboard;
+
 use BeaverCSS\BeaverParser;
 use BeaverCSS\Helpers\ScriptStyle;
+use BeaverCSS\Helpers\Ajax;
 
 use BeaverCSS\Dashboard\Section;
 use BeaverCSS\Dashboard\Controls\ControlColor;
@@ -16,9 +19,11 @@ class Init {
 
     public function __construct() {
 
+        new PluginVariables();
         new PluginDashboard();
         new BeaverParser();
         new ScriptStyle();
+        new Ajax();
 
         // load the controls and any js/css needed
         new ControlColor();

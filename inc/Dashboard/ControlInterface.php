@@ -21,7 +21,7 @@ interface ControlInterface {
      * @param  mixed $settings
      * @return void
      */
-    public function __( );
+    public function __( $output );
     
     /**
      * _e
@@ -31,6 +31,8 @@ interface ControlInterface {
      * @param  mixed $settings
      * @return void
      */
-    public function _e( );
+    public function _e( $output );
+
+    public function controlwrapper( $output );
 
 }
