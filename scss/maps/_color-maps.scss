@@ -25,10 +25,13 @@ $contextColors: (
     info: var(--info)
 );
     
+// hsl( $action-hover-h, $action-hover-s, $action-l * $action-hover-l )
 $colors : (
     actionSet : (
         action: $action-hex,
-        action-hover: hsl( $action-hover-h, $action-hover-s, $action-l * $action-hover-l ),
+        action-hover: darken( $action-hex , 20% ),
+        success: $success-hex,
+        success-hover: darken( $success-hex , 20% ),
         
     )
 );

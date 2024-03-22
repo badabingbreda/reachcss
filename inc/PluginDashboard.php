@@ -44,6 +44,31 @@ class PluginDashboard {
             'value' => $values[ 'type-base-min' ],
         ]);
 
+        new ControlText([
+            'dashboard' => 'beavercss',
+            'tab' => 'main',
+            'id' => 'type-base-max',
+            'label' => "Type base max",
+            'value' => $values[ 'type-base-max' ],
+        ]);
+
+        new ControlText([
+            'dashboard' => 'beavercss',
+            'tab' => 'main',
+            'id' => 'type-scale-min',
+            'label' => "Mobile Scale",
+            'value' => $values[ 'type-scale-min' ],
+        ]);
+
+        new ControlText([
+            'dashboard' => 'beavercss',
+            'tab' => 'main',
+            'id' => 'type-scale-max',
+            'label' => "Desktop Scale",
+            'value' => $values[ 'type-scale-max' ],
+        ]);
+
+
         new ControlColor( [ 
             'dashboard' => 'beavercss',
             'tab' => 'main',
@@ -56,8 +81,8 @@ class PluginDashboard {
         new ControlColor( [ 
             'dashboard' => 'beavercss',
             'tab' => 'main',
-            'value' => $values[ 'color-success' ],
-            'id' => 'color-success',
+            'value' => $values[ 'success-hex' ],
+            'id' => 'success-hex',
             'label' => "Color Success",
             'priority' => 20
         ]);

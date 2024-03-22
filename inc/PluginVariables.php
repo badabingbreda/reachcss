@@ -26,11 +26,14 @@ class PluginVariables {
         return array_merge(
             $variables,
             [
-                'color-success' => 'red' ,
+                'success-hex' => '#29A745',
                 'action-hex' => 'orange',
                 'font-color' => '#ff3300',
                 'extra-text' => 'So cool!',
                 'type-base-min' => '16px',
+                'type-base-max' => '19px',
+                'type-scale-min' => 1.2,
+                'type-scale-max' => 1.333,
             ]
         );
     }
