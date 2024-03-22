@@ -12,15 +12,15 @@ interface TabInterface {
      * @param  mixed $config
      * @return void
      */
-    public function __construct( $config = [] ); 
+    public function __construct( $settings = [] ); 
     
     /**
-     * set_config
+     * init
      *
      * @param  mixed $config
      * @return void
      */
-    public function set_config( $config );
+    public function init( $settings );
     
     /**
      * get_id
@@ -30,13 +30,6 @@ interface TabInterface {
      * @return void
      */
     public function get_id();
-    
-    /**
-     * taboutput
-     * 
-     * return the tab output
-     *
-     * @return void
-     */
-    public function taboutput();
+
+
 }

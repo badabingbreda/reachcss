@@ -19,13 +19,17 @@ class Dashboard {
 	 * errors that can be outputted to the dashboard
 	 * @var [type]
 	 */
-	public static $errors = array();
+	public $errors = array();
 
-	private static $dashboard_page = '';
-	private static $dashboard_heading = 'DASHBOARD TITLE';				// main title in dashboard content
-	private static $dashboard_title = 'DASHBOARD TITLE';				// in the sidebar menu
-	private static $dashboard_menu_title = 'DASHBOARD MENU TITLE';		// in the sidebar menu
-	private static $dashboard_capbility = 'delete_users';
+	public $settings = [];
+
+	public $defaults = [
+		'page' => '',
+		'heading' => 'DASHBOARD TITLE',	// main title in dashboard content
+		'title' => 'DASHBOARD TITLE',	// in the sidebar menu
+		'menu_title' => 'DASHBOARD MENU TITLE',	// in the sidebar menu
+		'capability' => 'delete_users',
+	];
 
 
 	/**
@@ -33,37 +37,46 @@ class Dashboard {
 	 *
 	 * @return [type] [description]
 	 */
-	public function __construct( $settings = null ) {
+	public function __construct( $settings = [] ) {
+		$this->settings = $this->parse_settings( $settings , $this->defaults );
 
-		if ( !is_array( $settings ) ) return;
+		add_action( 'after_setup_theme', array( $this , 'init_hooks' ), 11 );
 
-		self::$dashboard_page = $settings[ 'page' ]; 
-
-		if ( isset( $settings[ 'title' ] )) self::$dashboard_title = $settings[ 'title' ]; 
-		if ( isset( $settings[ 'menu_title' ] )) self::$dashboard_menu_title = $settings[ 'menu_title' ]; 
-		if ( isset( $settings[ 'heading' ] )) self::$dashboard_heading = $settings[ 'heading' ]; 
-
-		add_action( 'after_setup_theme', __CLASS__ . '::init_hooks', 11 );
-
-		add_filter( 'dashboard_settings_tabs', __CLASS__ . '::add_settings_default' , 10 , 1 );
+		add_filter( 'dashboard_settings_tabs', array( $this, 'add_settings_default' ), 10 , 1 );
 	}
+
+    /**
+     * parse_settings
+     * 
+     * merge settings with defaults
+     *
+     * @param  mixed $settings
+     * @param  mixed $defaults
+     * @return void
+     */
+    public function parse_settings( $settings , $defaults ) {
+        return wp_parse_args( 
+            $settings, 
+            $defaults);
+    }
+
 
 	/**
 	 * Init the correct hooks
 	 * @return [type] [description]
 	 */
-	public static function init_hooks() {
+	public function init_hooks() {
 
 		// return early if not executed by admin
 		if ( ! is_admin() ) return;
 
 		// add the settings menu
-		add_action( 'admin_menu', __CLASS__ . '::add_dashboard_menu' );
+		add_action( 'admin_menu', array( $this , 'add_dashboard_menu' ) );
 
 		// check for save action
-		if ( isset( $_REQUEST['page'] ) && self::$dashboard_page == $_REQUEST['page'] ) {
-			add_action( 'admin_enqueue_scripts', __CLASS__ . '::dashboard_styles_scripts' );
-			self::save();
+		if ( isset( $_REQUEST['page'] ) && $this->settings['page'] == $_REQUEST['page'] ) {
+			add_action( 'admin_enqueue_scripts', array( $this , 'dashboard_styles_scripts' ) );
+			$this->save();
 		}
 	}
 
@@ -71,7 +84,7 @@ class Dashboard {
 	 * Load the styles and scripts for the dashboard
 	 * @return [type] [description]
 	 */
-	public static function dashboard_styles_scripts() {
+	public function dashboard_styles_scripts() {
 
 		// load the jquery-tabs css and js
 		wp_enqueue_style( 'jquery-tabs'	, BEAVERCSS_URL . 'css/jquery.tabs.min.css'	, array(), BEAVERCSS_VERSION );
@@ -88,7 +101,7 @@ class Dashboard {
 	 * Show an admin notice on the update
 	 * @return [type] [description]
 	 */
-	public static function toolbox_settings_update_notice() {
+	public function toolbox_settings_update_notice() {
 
 		if ( 1 == $_REQUEST['status'] ) $class = 'notice notice-success';
 		if ( 0 == $_REQUEST['status'] ) $class = 'notice notice-error';
@@ -98,7 +111,7 @@ class Dashboard {
 	/**
 	 * Add the dashboard menu links and structure
 	 */
-	public static function add_dashboard_menu() {
+	public function add_dashboard_menu() {
 
 		// check minimum capability of delete_users
 		if( !current_user_can('delete_users') ) return;
@@ -107,11 +120,11 @@ class Dashboard {
 
 		$parent_slug 	= 'options-general.php';	// settings page
 
-		$page_title 	= self::$dashboard_title;
-		$menu_title		= self::$dashboard_menu_title;
-		$capability		= self::$dashboard_capbility;
-		$menu_slug		= self::$dashboard_page;
-		$callback 		= __CLASS__ . '::render_options';
+		$page_title 	= $this->settings['title'];
+		$menu_title		= $this->settings['menu_title'];
+		$capability		= $this->settings['capability'];
+		$menu_slug		= $this->settings['page'];
+		$callback 		= array( $this , 'render_options' );
 
 		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $callback );
 
@@ -121,7 +134,7 @@ class Dashboard {
 	 * render the options-template to the browser
 	 * @return [type] [description]
 	 */
-	public static function render_options() {
+	public function render_options() {
 
 		include_once( BEAVERCSS_DIR . 'dashboard/admin-options.php' );
 	}
@@ -130,7 +143,7 @@ class Dashboard {
 	 * Render the settings tabs
 	 * @return [type] [description]
 	 */
-	public static function render_settings_tabs() {
+	public function render_settings_tabs() {
 
 		$tabtemplate = '<div class="jq-tab-title" data-tab="%s">%s</div>';
 		$tabtemplate_active = '<div class="jq-tab-title" data-tab="%s">%s</div>';
@@ -155,7 +168,7 @@ class Dashboard {
 	}
 
 
-	public static function add_settings_default( $tabs ) {
+	public function add_settings_default( $tabs ) {
 		return array_merge( $tabs , array( array( 'slug' => 'default' , 'name' => esc_attr__( 'Main', 'toolbox' ) ) ) );
 	}
 
@@ -163,12 +176,12 @@ class Dashboard {
 	 * get the form(s)
 	 * @return [type] [description]
 	 */
-	public static function render_forms() {
+	public function render_forms() {
 
 
 		$tabs = apply_filters( 'dashboard_settings_tabs', [] );
 		foreach ( $tabs as $tab) {
-			self::render_form( $tab['slug'] );
+			$this->render_form( $tab['slug'] );
 		}
 
 	}
@@ -178,7 +191,7 @@ class Dashboard {
 	 * @param  [type] $type [description]
 	 * @return [type]       [description]
 	 */
-	public static function render_form( $type ) {
+	public function render_form( $type ) {
 
 		include BEAVERCSS_DIR . 'dashboard/admin-options-' . $type . '.php';
 	}
@@ -187,9 +200,9 @@ class Dashboard {
 	 * Render the heading to the browser
 	 * @return [type] [description]
 	 */
-	public static function render_heading() {
+	public function render_heading() {
 
-		echo '<h1>' . esc_attr( self::$dashboard_heading ) . '</h1>';
+		echo '<h1>' . esc_attr( $this->settings['heading'] ) . '</h1>';
 	}
 
 	/**
@@ -197,12 +210,12 @@ class Dashboard {
 	 * @param  string $type [description]
 	 * @return [type]       [description]
 	 */
-	static public function render_form_action( $type = '' ) {
+	public function render_form_action( $type = '' ) {
 
 		if ( is_network_admin() ) {
-			echo network_admin_url( '/settings.php?page=' . self::$dashboard_page . '#' . $type );
+			echo network_admin_url( '/settings.php?page=' . $this->settings['page'] . '#' . $type );
 		} else {
-			echo admin_url( '/options-general.php?page=' . self::$dashboard_page . '#' . $type );
+			echo admin_url( '/options-general.php?page=' . $this->settings['page'] . '#' . $type );
 		}
 	}
 
@@ -211,12 +224,12 @@ class Dashboard {
 	 * @param  string $type [description]
 	 * @return [type]       [description]
 	 */
-	static public function get_form_action( $type = '' ) {
+	public function get_form_action( $type = '' ) {
 
 		if ( is_network_admin() ) {
-			return network_admin_url( '/settings.php?page=' . self::$dashboard_page . '#' . $type );
+			return network_admin_url( '/settings.php?page=' . $this->settings['page'] . '#' . $type );
 		} else {
-			return admin_url( '/options-general.php?page=' . self::$dashboard_page . '#' . $type );
+			return admin_url( '/options-general.php?page=' . $this->settings['page'] . '#' . $type );
 		}
 	}
 
@@ -224,12 +237,12 @@ class Dashboard {
 	 * Render the errors or update message
 	 * @return [type] [description]
 	 */
-	public static function render_update_message() {
+	public function render_update_message() {
 
-		if ( !empty( self::$errors ) ) {
+		if ( !empty( $this->errors ) ) {
 
 			// display the errors
-			foreach ( self::$errors as $message ) {
+			foreach ( $this->errors as $message ) {
 				echo '<div class="error"><p>'.$message.'</p></div>';
 			}
 
@@ -244,23 +257,23 @@ class Dashboard {
 	 * Add an error to the array
 	 * @param [type] $message [description]
 	 */
-	public static function add_error( $message ) {
+	public function add_error( $message ) {
 
-		self::$errors[] = $message;
+		$this->errors[] = $message;
 	}
 
 	/**
 	 * Saves the admin settings.
 	 * @return [type] [description]
 	 */
-	static public function save() {
+	public function save() {
 
 		// Only admins can save settings.
 		if ( ! current_user_can( 'delete_users' ) ) {
 			return;
 		}
 
-		self::save_toolbox_defaults();
+		$this->save_toolbox_defaults();
 
 		do_action( 'toolbox_dashboard_on_panel_save' );
 
@@ -273,7 +286,7 @@ class Dashboard {
 	 * @param  [type] $value [description]
 	 * @return [type]        [description]
 	 */
-	public static function input( $type , $options = [] ) {
+	public function input( $type , $options = [] ) {
 
 		$type 	= esc_html( $type );
 		$options = array_map( 'esc_attr' , $options );
@@ -282,7 +295,7 @@ class Dashboard {
 			case "text":
 
 				$options = wp_parse_args( $options ,
-											self::key_defaults( [ 'value' , 'id' ] )
+											$this->key_defaults( [ 'value' , 'id' ] )
 				);
 
 				return "<input type=\"{$type}\" id=\"{$options['id']}\" name=\"{$options['id']}\" value=\"{$options['value']}\">";
@@ -292,7 +305,7 @@ class Dashboard {
 			case "checkbox":
 
 				$options = wp_parse_args( $options ,
-											self::key_defaults( [ 'value' , 'id' , 'checked' ] )
+											$this->key_defaults( [ 'value' , 'id' , 'checked' ] )
 				);
 
 				return "<input type=\"${type}\" value=\"{$options['value']}\" name=\"{$options['id']}\" id=\"{$options['id']}\" {$options['checked']}>";
@@ -302,7 +315,7 @@ class Dashboard {
 			case "submit":
 
 				$options = wp_parse_args( $options ,
-											self::key_defaults( [ 'value' ] )
+											$this->key_defaults( [ 'value' ] )
 				);
 
 				return "<input type=\"${type}\" name=\"update\" class=\"button-primary\" value=\"{$options['value']}\" />
@@ -321,7 +334,7 @@ class Dashboard {
 	 * @param  string $default [description]
 	 * @return [type]          [description]
 	 */
-	public static function key_defaults( $keys , $default = "" ) {
+	public function key_defaults( $keys , $default = "" ) {
 		$key_pairs = [];
 		foreach ($keys as $key ) {
 
@@ -332,7 +345,7 @@ class Dashboard {
 		return $key_pairs;
 	}
 
-	private static function save_toolbox_defaults() {
+	private function save_toolbox_defaults() {
 
 		$admin_dashboard_name = 'default';
 
@@ -352,7 +365,7 @@ class Dashboard {
 	 * @param  mixed $value
 	 * @return void
 	 */
-	private static function check_admin_nonce( $noncename , $value ) {
+	private function check_admin_nonce( $noncename , $value ) {
 		return ( !isset( $_POST[ $noncename ] ) || !wp_verify_nonce( $_POST[ $noncename ] , $value ) );
 
 	}
@@ -365,7 +378,7 @@ class Dashboard {
 	 * @param  mixed $settings
 	 * @return void
 	 */
-	private static function update_or_delete_option( $settings ) {
+	private function update_or_delete_option( $settings ) {
 
 		$settings = \wp_parse_args( $settings, [
 			'option_name' => null,

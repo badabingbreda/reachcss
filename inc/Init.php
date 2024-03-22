@@ -1,8 +1,8 @@
 <?php
 namespace BeaverCSS;
-use BeaverCSS\Helpers\ScriptStyle;
+use BeaverCSS\PluginDashboard;
 use BeaverCSS\BeaverParser;
-use BeaverCSS\Dashboard\Dashboard;
+use BeaverCSS\Helpers\ScriptStyle;
 
 use BeaverCSS\Dashboard\Section;
 use BeaverCSS\Dashboard\Controls\ControlColor;
@@ -15,18 +15,17 @@ use BeaverCSS\Dashboard\Controls\ControlText;
 class Init {
 
     public function __construct() {
-        new Dashboard( [ 
-            'page' => 'beavercss',
-            'menu_title' => 'Beaver CSS',
-            'title' => 'Beaver CSS',
-            'heading' => 'BEAVER CSS HEADING',
-        ] );
+
+        new PluginDashboard();
         new BeaverParser();
         new ScriptStyle();
 
         // load the controls and any js/css needed
         new ControlColor();
+        new ControlDropdown();
+        new ControlMultiCheckbox();
         new ControlSubmit();
         new ControlSwitch();
+        new ControlText();
     }
 }
