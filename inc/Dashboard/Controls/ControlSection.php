@@ -20,7 +20,7 @@ class ControlSection extends Control {
     public function controlwrapper( $output ) {
 
         return $output .=<<<EOL
-        <div class="section">
+        <div class="section" id="{$this->settings['id']}">
         <h3>{$this->settings[ 'label' ]}</h3>
         {$this->__($output)}
         </div>

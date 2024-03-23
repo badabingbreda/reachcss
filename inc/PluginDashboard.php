@@ -254,6 +254,17 @@ class PluginDashboard {
             'priority' => 10
         ]);
 
+        new ControlSwitch([
+            'id' => 'add-contextual-colors',
+            'dashboard' => 'beavercss',
+            'tab' => 'colors',
+            'label' => 'Add Contextual Colors',
+            'target' => '#contextualcolors',
+            'classtoggle' => 'hidden',
+            'state' => PluginVariables::get('add-contextual-colors' ),
+
+        ]);
+
         new ControlSection([
             'id' => 'contextualcolors',
             'dashboard' => 'beavercss',

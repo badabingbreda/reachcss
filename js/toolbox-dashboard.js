@@ -1,5 +1,6 @@
 (function ($) {
     $(document).ready( function() {
+        var tab = '';
         $('#adminoptions-tab').jqTabs( { duration: 200 });
         $("#adminoptions-tab .jq-tab-menu .jq-tab-title").click( function () {
             // show hash in top-bar
@@ -10,7 +11,8 @@
             var url = window.location.href,
                 tab = url.substring(url.indexOf('#')+1);
         } else {
-                tab = 'default';
+                // get first tab
+                tab = $( `[data-tab]:first`).data( 'tab' );
         }
         // activate the button and content
         $('[data-tab='+tab+']').addClass('active');
@@ -88,7 +90,7 @@ beaverCSS.prototype = {
             classtoggle = switchElem.dataset.switchClasstoggle,
             laststate = switchElem.dataset.switchLaststate;
         
-        if ( laststate ) { 
+        if ( laststate === 'true' ) { 
             document.querySelector( target ).classList.remove( classtoggle );
         } else {
             document.querySelector( target ).classList.add( classtoggle );

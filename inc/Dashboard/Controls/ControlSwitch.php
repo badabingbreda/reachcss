@@ -25,9 +25,9 @@ class ControlSwitch extends Control {
         $settings = $this->settings;
 
         $class = $this->outputIf( $settings[ 'class' ] );
-        $state = $settings[ "state" ] ? "checked" : "";
+        $state = $settings[ "state" ] === 'true' ? "checked" : "";
 
-        return $output .= 
+        return  
         <<<EOL
         <div class="control-field switch {$class}"
         data-control-type="switch"
