@@ -6,5 +6,7 @@ $gap-base : 16px !default;   // multiplyer for px font-size
 
 $gap-scale : 1.5 !default;
 
+$gap-base : $gap-base + 0px;
+
 $gap-steps : 'xs' , 's' , 'm' , 'l' , 'xl' , 'xxl';
 $gap-base-index : 3;

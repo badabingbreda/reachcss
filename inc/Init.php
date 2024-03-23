@@ -14,6 +14,9 @@ use BeaverCSS\Dashboard\Controls\ControlMultiCheckbox;
 use BeaverCSS\Dashboard\Controls\ControlSubmit;
 use BeaverCSS\Dashboard\Controls\ControlSwitch;
 use BeaverCSS\Dashboard\Controls\ControlText;
+use BeaverCSS\Dashboard\Controls\ControlSection;
+use BeaverCSS\Dashboard\Controls\ControlParagraph;
+
 
 class Init {
 

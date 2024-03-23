@@ -39,6 +39,8 @@ beaverCSS.prototype = {
         this.add_filter( 'getControlValue' , this.getControlSwitchValue.bind( this ) , 10 );
         this.add_filter( 'getControlValue' , this.getControlColorValue.bind( this ) , 10 );
         this.add_filter( 'getControlValue' , this.getControlTextValue.bind( this ) , 10 );
+        this.add_filter( 'getControlValue' , this.getControlSliderValue.bind( this ) , 10 );
+
 
         
         this.do_action( 'init' , this.settings );
@@ -155,6 +157,12 @@ beaverCSS.prototype = {
     getControlTextValue : function ( value , elem, type ) {
         // return the value early
         if ( type !== 'text' ) return value;
+        return { [elem.querySelector( 'input' ).id] : elem.querySelector( 'input' ).value };
+    },
+
+    getControlSliderValue : function ( value , elem, type ) {
+        // return the value early
+        if ( type !== 'slider' ) return value;
         return { [elem.querySelector( 'input' ).id] : elem.querySelector( 'input' ).value };
     },
 

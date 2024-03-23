@@ -5,10 +5,15 @@ $media-breakpoint-m    : 960px !default;
 $media-breakpoint-l     : 1200px !default;
 $media-breakpoint-xl    : 1600px !default;
 
+$media-breakpoint-s : $media-breakpoint-s + 0px;
+$media-breakpoint-m : $media-breakpoint-m + 0px;
+$media-breakpoint-l : $media-breakpoint-l + 0px;
+$media-breakpoint-xl : $media-breakpoint-xl + 0px;
+
 $media-breakpoints: (
-    s : $media-breakpoint-s,
-    m : $media-breakpoint-m,
-    l : $media-breakpoint-l,
-    xl: $media-breakpoint-xl
+    s : $media-breakpoint-s + 0px,
+    m : $media-breakpoint-m + 0px,
+    l : $media-breakpoint-l + 0px,
+    xl: $media-breakpoint-xl + 0px
 );
 

@@ -5,5 +5,7 @@
 $radius-base : 1rem !default;
 $radius-scale : 1.5 !default;
 
+$radius-base : $radius-base + 0rem;
+
 $radius-steps : ('xs' , 's' , 'm' , 'l' , 'xl' , 'xxl');
 $radius-base-index : 3;

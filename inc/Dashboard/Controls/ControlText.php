@@ -13,6 +13,8 @@ class ControlText extends Control {
         "value" => "",
         "placeholder" => "",
         "class" => null,
+        "type" => "text",
+        "suffix" => null,
         "dashboard" => null,
         "tab" => null,
         "section" => null,
@@ -23,19 +25,27 @@ class ControlText extends Control {
         
         $settings = $this->settings;
     
+        $suffix = "";
+        
+        if ( $this->settings[ 'suffix' ] ) {
+            $suffix = "<div class=\"suffix\">{$this->settings['suffix']}</div>";
+        }
+
         $class = $this->outputIf( $settings[ 'class' ] );
+        if ( $this->settings[ 'suffix' ] ) $class .= ' has-suffix';
     
         return  
         <<<EOL
-        <div class="control-field text{$class}"
+        <div class="control-field text {$class}"
         data-control-type="text">
         <input 
-            type="text" 
+            type="{$settings['type']}"
+            placeholder="{$settings['placeholder']}"
             id="{$settings['id']}"
             name="{$settings[ "id" ]}" 
             value="{$settings[ "value" ]}" 
-        
-        >
+        >{$suffix}
+
         </div>
         EOL;
     }

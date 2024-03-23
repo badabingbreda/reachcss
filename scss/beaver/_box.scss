@@ -3,6 +3,10 @@
 // @use 'sass:map';
 
 
+$max-grids : 4 !default;
+
+$max-grids : $max-grids + 0;
+
 .#{$prefix}grid {
     display: grid;
 }
@@ -11,19 +15,19 @@
     grid-template-columns: 1fr;
 }
 
-@for $i from 2 through 4 {
+@for $i from 2 through $max-grids {
     .#{$prefix}grid-#{$i} {
         grid-template-columns: repeat( #{$i}, 1fr );
     }
 }
 
-@for $i from 1 through 4 {
+@for $i from 1 through $max-grids {
     .#{$prefix}grid-col-span-#{$i} {
         grid-column: span #{$i};
     }
 }
 
-@for $i from 1 through 4 {
+@for $i from 1 through $max-grids {
     .#{$prefix}grid-row-span-#{$i} {
         grid-row: span #{$i};
     }
@@ -39,19 +43,19 @@
             grid-template-columns: 1fr;
         }
 
-        @for $i from 2 through 4 {
+        @for $i from 2 through $max-grids {
             .#{$prefix}grid-#{$i}\@#{$bp} {
                 grid-template-columns: repeat( #{$i}, 1fr );
             }
         }
 
-        @for $i from 1 through 4 {
+        @for $i from 1 through $max-grids {
             .#{$prefix}grid-col-span-#{$i}\@#{$bp} {
                 grid-column: span #{$i};
             }
         }
 
-        @for $i from 1 through 4 {
+        @for $i from 1 through $max-grids {
             .#{$prefix}grid-row-span-#{$i}\@#{$bp} {
                 grid-row: span #{$i};
             }

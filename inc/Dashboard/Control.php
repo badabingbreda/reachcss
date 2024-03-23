@@ -27,7 +27,11 @@ abstract class Control implements ControlInterface {
         // maybe enqueue scripts and styles
         $this->scripts();
         if ( $this->set_and_value( 'dashboard') && $this->set_and_value( 'tab' ) && $this->set_and_value( 'priority' ) ) {
-            add_filter( 'beavercss/dashboard/' . $this->settings[ 'dashboard' ] . '/tabs/' . $this->settings[ 'tab' ] . '/controls' , array($this , 'controlwrapper' ) , $this->settings[ 'priority' ] , 1 );
+            if ( $this->set_and_value( 'section' ) ) {
+                add_filter( 'beavercss/dashboard/' . $this->settings[ 'dashboard' ] . '/tabs/' . $this->settings[ 'tab' ] . '/' .  $this->settings[ 'section' ]. '/controls' , array($this , 'controlwrapper' ) , $this->settings[ 'priority' ] , 1 );
+            } else {
+                add_filter( 'beavercss/dashboard/' . $this->settings[ 'dashboard' ] . '/tabs/' . $this->settings[ 'tab' ] . '/controls' , array($this , 'controlwrapper' ) , $this->settings[ 'priority' ] , 1 );
+            }
         }
     }
 
