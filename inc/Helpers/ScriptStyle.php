@@ -20,7 +20,7 @@ class ScriptStyle {
     public static function beavercss() {
 
         $settings = File::dir_settings( 'beavercss' );
-        wp_enqueue_style( 'beavercss',  $settings['baseurl'] . '/beavercss/beavercss.css' , false, BEAVERCSS_VERSION, 'all' );
+        wp_enqueue_style( 'beavercss',  $settings['baseurl'] . '/beavercss/beavercss.css' , false, get_option( 'beavercss_fileversion', false ) , 'all' );
     }
     
 

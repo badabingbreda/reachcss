@@ -37,7 +37,7 @@ class BeaverParser {
         /**
          * set import paths
          */
-        $compiler->setImportPaths( BEAVERCSS_DIR . 'scss/' );
+        $compiler->setImportPaths( BEAVERCSS_DIR . 'import/scss/' );
 
         $variables = apply_filters( 'beavercss/variables' , [] );
 
@@ -49,7 +49,6 @@ class BeaverParser {
 
         /**
          * Compile to string and get css
-         * !!todo: add try-catch for error handling
          */
 
          try {
@@ -67,6 +66,8 @@ class BeaverParser {
              // create the directory if not already exists
              File::create_dir( self::$directory );
              File::write_file( self::$directory ,  self::$filename . '.css' , $css );
+             // add or update option value
+             \update_option( 'beavercss_fileversion' , date( 'Ymd-His') );
          }
          return $success;
     }

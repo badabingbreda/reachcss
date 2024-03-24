@@ -30,8 +30,26 @@ $colors : (
     actionSet : (
         action: $action-hex,
         action-hover: darken( $action-hex , 20% ),
+        primary: $primary-hex,
+        primary-hover: darken( $primary-hex , 20% ),
+        action: $action-hex,
+        action-hover: darken( $action-hex , 20% ),
+        secondary: $secondary-hex,
+        secondary-hover: darken( $secondary-hex , 20% ),
+        accent: $accent-hex,
+        accent-hover: darken( $accent-hex , 20% ),
+        base: $base-hex,
+        base-hover: darken( $base-hex , 20% ),
+        shade: $shade-hex,
+        shade-hover: darken( $shade-hex , 20% ),
         success: $success-hex,
         success-hover: darken( $success-hex , 20% ),
+        danger: $danger-hex,
+        danger-hover: darken( $danger-hex , 20% ),
+        warning: $warning-hex,
+        warning-hover: darken( $warning-hex , 20% ),
+        info: $info-hex,
+        info-hover: darken( $info-hex , 20% ),
         
     )
 );

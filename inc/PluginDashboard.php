@@ -30,7 +30,7 @@ class PluginDashboard {
             'id' => 'beavercss',
             'menu_title' => 'Beaver CSS',
             'title' => 'Beaver CSS',
-            'heading' => 'Custom CSS creator',
+            'heading' => 'Beaver CSS Settings',
             'type' => 'menu',
         ] ); 
 
@@ -258,7 +258,7 @@ class PluginDashboard {
             'id' => 'add-contextual-colors',
             'dashboard' => 'beavercss',
             'tab' => 'colors',
-            'label' => 'Add Contextual Colors',
+            'label' => 'Add Contextual Colors?',
             'target' => '#contextualcolors',
             'classtoggle' => 'hidden',
             'state' => PluginVariables::get('add-contextual-colors' ),
@@ -393,7 +393,7 @@ class PluginDashboard {
             'id' => 'max-grids',
             'label' => "Max Number of Grid Cols",
             'value' => PluginVariables::get('max-grids' ),
-            'options' => [ 1 , 2 , 3 , 4 , 5 ]
+            'options' => [ 3 , 4 , 5 , 6 , 7 , 8 ]
         ]);
 
         new ControlText([

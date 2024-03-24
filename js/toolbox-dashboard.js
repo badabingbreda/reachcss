@@ -125,7 +125,7 @@ beaverCSS.prototype = {
         .then( ( data ) => {
                 this.sending = false;
                 let success = data.success ? 'successful!' : 'NOT successful';
-                alert( `took me only ${data.time} seconds and results was ${success}` );
+                notis.create( { title : success , description : `took me only ${data.time} seconds and results was ${success}` , duration: 5 ,  destroyOnClick: true } );
         })
         .catch( (error) => {
             this.sending = false;

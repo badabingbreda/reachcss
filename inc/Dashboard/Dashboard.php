@@ -90,6 +90,9 @@ class Dashboard {
 		wp_enqueue_style( 'jquery-tabs'	, BEAVERCSS_URL . 'css/jquery.tabs.min.css'	, array(), BEAVERCSS_VERSION );
 		wp_enqueue_script( 'jquery-tabs', BEAVERCSS_URL . 'js/jquery.tabs.min.js'		, array(), BEAVERCSS_VERSION );
 
+		wp_enqueue_style( 'notifications'	, BEAVERCSS_URL . 'css/notifications.css'	, array(), BEAVERCSS_VERSION );
+		wp_enqueue_script( 'notifications', BEAVERCSS_URL . 'js/notifications.js'		, array(), BEAVERCSS_VERSION , true );
+
 		// toolbox-dashboard css and js
 		wp_enqueue_style( 'toolbox-dashboard'	, BEAVERCSS_URL . 'css/toolbox-dashboard.css'	, array(), BEAVERCSS_VERSION );
 		wp_enqueue_script( 'toolbox-dashboard'	, BEAVERCSS_URL . 'js/toolbox-dashboard.js'	, array(), BEAVERCSS_VERSION );
@@ -177,6 +180,7 @@ class Dashboard {
 				</div>
 			</div>
 		</div>
+		<div class="notifications"></div>
 		<?php		
 	}
 
