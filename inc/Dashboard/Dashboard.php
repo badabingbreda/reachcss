@@ -97,6 +97,12 @@ class Dashboard {
 		wp_enqueue_style( 'toolbox-dashboard'	, BEAVERCSS_URL . 'css/toolbox-dashboard.css'	, array(), BEAVERCSS_VERSION );
 		wp_enqueue_script( 'toolbox-dashboard'	, BEAVERCSS_URL . 'js/toolbox-dashboard.js'	, array(), BEAVERCSS_VERSION );
 
+		// localize the script for use in JS
+		wp_localize_script( 'toolbox-dashboard', 'BEAVERCSS_LOCAL', array(
+			'admin_ajax_url' => admin_url( 'admin-ajax.php' ),
+			'_wpnonce' => wp_create_nonce( 'beavercss_update_settings' ),
+		) );
+
 	}
 
 

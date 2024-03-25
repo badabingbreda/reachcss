@@ -10,12 +10,23 @@ class PluginVariables {
         // make sure to set these to update before our PluginDashboard loads
         add_action( 'setup_theme' , __CLASS__ . '::set_variables' , 10, 1);
     }
-
+    
+    /**
+     * set_variables
+     *
+     * @return void
+     */
     public static function set_variables( ) {
         add_filter( 'beavercss/variables' , __CLASS__ . '::default_variables' , 10 , 1 );
-        add_filter( 'beavercss/variables' , __CLASS__ . '::stored_settings' , 10 , 1 );
+        add_filter( 'beavercss/variables' , __CLASS__ . '::stored_settings' , 20 , 1 );
     }
-
+    
+    /**
+     * stored_settings
+     *
+     * @param  mixed $variables
+     * @return void
+     */
     public static function stored_settings( $variables ) {
         if ( $file = File::get_file( 'beavercss' , 'settings.json' ) ) {
             $loaded_settings = json_decode( $file , true );
@@ -23,7 +34,13 @@ class PluginVariables {
         }
         return $variables;
     }
-
+    
+    /**
+     * default_variables
+     *
+     * @param  mixed $variables
+     * @return void
+     */
     public static function default_variables( $variables ) {
         return array_merge(
             $variables,
@@ -55,7 +72,14 @@ class PluginVariables {
             ]
         );
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $key
+     * @param  mixed $force
+     * @return void
+     */
     public static function get( $key , $force = false ) {
         if ( !self::$variables || $force ) self::$variables = apply_filters( 'beavercss/variables' , [] );
         return isset( self::$variables[ $key ] ) ? self::$variables[ $key ] : '';

@@ -112,20 +112,23 @@ beaverCSS.prototype = {
         this.sending = true;
 
         // use fetch
-        fetch( `/wp-admin/admin-ajax.php?action=beavercss_update`,
+        fetch( BEAVERCSS_LOCAL.admin_ajax_url + `?action=beavercss_update`,
         {
             method: 'POST',
             headers: { 
                 'Accept' : 'application/json',
                 'Content-Type': 'application/json',
+                'X-WP-Nonce': BEAVERCSS_LOCAL._wpnonce,
             },
             body: this.asFormData( settings ),
         } )
         .then( ( response ) => response.json() )
         .then( ( data ) => {
                 this.sending = false;
-                let success = data.success ? 'successful!' : 'NOT successful';
-                notis.create( { title : success , description : `took me only ${data.time} seconds and results was ${success}` , duration: 5 ,  destroyOnClick: true } );
+                console.log( data.notifications );
+                data.notifications.forEach( (noti, index) => {
+                    setTimeout( () => { notis.create( { title : noti.title , description : noti.description , duration: 5 ,  destroyOnClick: true } ); } , index * 300 );
+                });
         })
         .catch( (error) => {
             this.sending = false;

@@ -15,14 +15,24 @@ class BeaverParser {
 
         add_action( 'init' , __CLASS__ . '::try_compile' );
     }
-    
+        
+    /**
+     * try_compile
+     *
+     * @return void
+     */
     public static function try_compile() {
         
         if ( !file_exists( File::get_file_path( self::$directory ) . '/' . self::$filename . '.css' ) ) {
             self::compile();
         }
     }
-
+    
+    /**
+     * compile
+     *
+     * @return void
+     */
     public static function compile() {
 
         $success = false;
@@ -71,7 +81,12 @@ class BeaverParser {
          }
          return $success;
     }
-
+    
+    /**
+     * datetimestamp
+     *
+     * @return void
+     */
     private static function datetimestamp() {
 
         return "/** BeaverCSS Version " . BEAVERCSS_VERSION . ", Generated on: " . date( 'Y-m-d H:i:s' ) . " **/\r\n";
