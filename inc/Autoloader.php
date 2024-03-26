@@ -2,11 +2,11 @@
 /**
  * Autoloader class
  *
- * @package BeaverCSS
+ * @package ReachCSS
  * @since 1.0.0
  */
 
-namespace BeaverCSS;
+namespace ReachCSS;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -94,7 +94,7 @@ class Autoloader {
 		$relative_class_path = substr( $class, strlen( self::AUTOLOADED_NAMESPACE_PREFIX ) );
 		$relative_file_path = str_replace( '\\', '/', $relative_class_path ) . '.php';
 
-		return dirname( CHECK_BEAVERCSS_PLUGIN_FILE ) . '/inc/' . $relative_file_path;
+		return dirname( CHECK_REACHCSS_PLUGIN_FILE ) . '/inc/' . $relative_file_path;
 	}
 
 }

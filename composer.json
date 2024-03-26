@@ -1,8 +1,9 @@
 {
-    "name": "didou/beavercss",
+    "name": "didou/reachcss",
     "type": "project",
     "require": {
-        "scssphp/scssphp": "^1.12"
+        "scssphp/scssphp": "^1.12",
+        "badabingbreda/savvy-panel": "dev-main"
     },
     "authors": [
         {

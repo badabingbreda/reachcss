@@ -1,22 +1,11 @@
 <?php
-namespace BeaverCSS;
-use BeaverCSS\PluginVariables;
-use BeaverCSS\PluginDashboard;
+namespace ReachCSS;
+use ReachCSS\PluginVariables;
+use ReachCSS\PluginDashboard;
 
-use BeaverCSS\BeaverParser;
-use BeaverCSS\Helpers\ScriptStyle;
-use BeaverCSS\Helpers\Ajax;
-
-use BeaverCSS\Dashboard\Section;
-use BeaverCSS\Dashboard\Controls\ControlColor;
-use BeaverCSS\Dashboard\Controls\ControlDropdown;
-use BeaverCSS\Dashboard\Controls\ControlMultiCheckbox;
-use BeaverCSS\Dashboard\Controls\ControlSubmit;
-use BeaverCSS\Dashboard\Controls\ControlSwitch;
-use BeaverCSS\Dashboard\Controls\ControlText;
-use BeaverCSS\Dashboard\Controls\ControlSection;
-use BeaverCSS\Dashboard\Controls\ControlParagraph;
-
+use ReachCSS\BeaverParser;
+use ReachCSS\Helpers\ScriptStyle;
+use ReachCSS\Helpers\Ajax;
 
 class Init {
 
@@ -28,12 +17,5 @@ class Init {
         new ScriptStyle();
         new Ajax();
 
-        // load the controls and any js/css needed
-        new ControlColor();
-        new ControlDropdown();
-        new ControlMultiCheckbox();
-        new ControlSubmit();
-        new ControlSwitch();
-        new ControlText();
     }
 }

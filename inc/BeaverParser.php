@@ -1,15 +1,15 @@
 <?php
-namespace BeaverCSS;
+namespace ReachCSS;
 
-use BeaverCSS\Helpers\File;
+use ReachCSS\Helpers\File;
 
 use \ScssPhp\ScssPhp\Compiler;
 
-class BeaverParser {
+class ReachParser {
 
-	private static $directory = 'beavercss/';  // directory relative to the wp-content/uploads/ directory
+	private static $directory = 'reachcss/';  // directory relative to the wp-content/uploads/ directory
 
-    private static $filename = 'beavercss';    // just the filename. no extension because we add that dynamically based on the minification setting
+    private static $filename = 'reachcss';    // just the filename. no extension because we add that dynamically based on the minification setting
 
     public function __construct() {
 
@@ -37,8 +37,6 @@ class BeaverParser {
 
         $success = false;
 
-        require_once( BEAVERCSS_DIR . 'vendor/autoload.php' );
-
         /**
          * Instanciate a new Compiler
          */
@@ -49,7 +47,7 @@ class BeaverParser {
          */
         $compiler->setImportPaths( BEAVERCSS_DIR . 'import/scss/' );
 
-        $variables = apply_filters( 'beavercss/variables' , [] );
+        $variables = apply_filters( 'reachcss/variables' , [] );
 
         /**
          * add variables at this point. 
@@ -62,7 +60,7 @@ class BeaverParser {
          */
 
          try {
-             $css = $compiler->compileString( "@import \"beavercss.scss\";" )->getCss();
+             $css = $compiler->compileString( "@import \"reachcss.scss\";" )->getCss();
              $success = true;
          } catch (\Exception $e) {
             $css = "somthing didn't go as planned...";
@@ -77,7 +75,7 @@ class BeaverParser {
              File::create_dir( self::$directory );
              File::write_file( self::$directory ,  self::$filename . '.css' , $css );
              // add or update option value
-             \update_option( 'beavercss_fileversion' , date( 'Ymd-His') );
+             \update_option( 'reachcss_fileversion' , date( 'Ymd-His') );
          }
          return $success;
     }
@@ -89,6 +87,6 @@ class BeaverParser {
      */
     private static function datetimestamp() {
 
-        return "/** BeaverCSS Version " . BEAVERCSS_VERSION . ", Generated on: " . date( 'Y-m-d H:i:s' ) . " **/\r\n";
+        return "/** ReachCSS Version " . BEAVERCSS_VERSION . ", Generated on: " . date( 'Y-m-d H:i:s' ) . " **/\r\n";
     }
 }

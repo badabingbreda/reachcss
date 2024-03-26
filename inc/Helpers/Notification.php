@@ -1,5 +1,5 @@
 <?php
-namespace BeaverCSS\Helpers;
+namespace ReachCSS\Helpers;
 
 const BC_SUCCESS = 200;
 const BC_FAILED_NONCE_CHECK = 500;

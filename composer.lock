@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ade99a09e9170dd779801ef5b581f826",
+    "content-hash": "f444ee9c979d865ebe81421321ae6af0",
     "packages": [
+        {
+            "name": "badabingbreda/savvy-panel",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/badabingbreda/savvy-panel.git",
+                "reference": "d66f7c87bb3b217a7172b045738e0180762d9479"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/badabingbreda/savvy-panel/zipball/d66f7c87bb3b217a7172b045738e0180762d9479",
+                "reference": "d66f7c87bb3b217a7172b045738e0180762d9479",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SavvyPanel\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "badabingbreda",
+                    "email": "didou@badabing.nl"
+                }
+            ],
+            "description": "Create WordPress Dashboard Panels and controls",
+            "keywords": [
+                "Settings",
+                "dashboard",
+                "panel",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/badabingbreda/savvy-panel/issues",
+                "source": "https://github.com/badabingbreda/savvy-panel/tree/main"
+            },
+            "time": "2024-03-26T16:55:07+00:00"
+        },
         {
             "name": "scssphp/scssphp",
             "version": "v1.12.1",
@@ -90,7 +134,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "badabingbreda/savvy-panel": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

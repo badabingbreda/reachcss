@@ -1,6 +1,6 @@
 <?php
-namespace BeaverCSS;
-use BeaverCSS\Helpers\File;
+namespace ReachCSS;
+use ReachCSS\Helpers\File;
 
 class PluginVariables {
 
@@ -17,8 +17,8 @@ class PluginVariables {
      * @return void
      */
     public static function set_variables( ) {
-        add_filter( 'beavercss/variables' , __CLASS__ . '::default_variables' , 10 , 1 );
-        add_filter( 'beavercss/variables' , __CLASS__ . '::stored_settings' , 20 , 1 );
+        add_filter( 'reachcss/variables' , __CLASS__ . '::default_variables' , 10 , 1 );
+        add_filter( 'reachcss/variables' , __CLASS__ . '::stored_settings' , 20 , 1 );
     }
     
     /**
@@ -28,7 +28,7 @@ class PluginVariables {
      * @return void
      */
     public static function stored_settings( $variables ) {
-        if ( $file = File::get_file( 'beavercss' , 'settings.json' ) ) {
+        if ( $file = File::get_file( 'reachcss' , 'settings.json' ) ) {
             $loaded_settings = json_decode( $file , true );
             return array_merge( $variables, $loaded_settings );
         }
@@ -81,7 +81,7 @@ class PluginVariables {
      * @return void
      */
     public static function get( $key , $force = false ) {
-        if ( !self::$variables || $force ) self::$variables = apply_filters( 'beavercss/variables' , [] );
+        if ( !self::$variables || $force ) self::$variables = apply_filters( 'reachcss/variables' , [] );
         return isset( self::$variables[ $key ] ) ? self::$variables[ $key ] : '';
     }
 

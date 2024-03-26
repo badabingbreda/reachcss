@@ -1,12 +1,13 @@
 <?php
-namespace BeaverCSS\Helpers;
-use BeaverCSS\Helpers\File;
+namespace ReachCSS\Helpers;
+use ReachCSS\Helpers\File;
 
 class ScriptStyle {
 
     public function __construct() {
 
-        add_action( 'wp_enqueue_scripts'    , __CLASS__ . '::beavercss' , 1000 , 1 );
+        add_action( 'wp_enqueue_scripts'    , __CLASS__ . '::reachcss' , 1000 , 1 );
+        add_action( 'admin_enqueue_scripts' , __CLASS__ . '::admin_files' , 10 , 1 );
 
     }
     
@@ -17,11 +18,17 @@ class ScriptStyle {
      *
      * @return void
      */
-    public static function beavercss() {
+    public static function reachcss() {
 
         $settings = File::dir_settings( 'beavercss' );
-        wp_enqueue_style( 'beavercss',  $settings['baseurl'] . '/beavercss/beavercss.css' , false, get_option( 'beavercss_fileversion', false ) , 'all' );
+        wp_enqueue_style( 'reachcss',  $settings['baseurl'] . '/reachcss/reachcss.css' , false, get_option( 'reachcss_fileversion', false ) , 'all' );
     }
+    
+    public static function admin_files() {
+        wp_enqueue_script( 'savvypanel-handler', BEAVERCSS_URL . 'js/savvy-panel.js', null, BEAVERCSS_VERSION, false );
+    }
+
+
     
 
 }

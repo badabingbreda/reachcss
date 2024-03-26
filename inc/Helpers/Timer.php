@@ -1,5 +1,5 @@
 <?php
-namespace BeaverCSS\Helpers;
+namespace ReachCSS\Helpers;
 
 class Timer {
 

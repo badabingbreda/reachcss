@@ -8,7 +8,7 @@
  * @link https://www.badabing.nl
  * @license GNU General Public License 2.0+
  */
-namespace BeaverCSS\Helpers;
+namespace ReachCSS\Helpers;
 
 final class File {
     
