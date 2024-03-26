@@ -45,7 +45,7 @@ class ReachParser {
         /**
          * set import paths
          */
-        $compiler->setImportPaths( BEAVERCSS_DIR . 'import/scss/' );
+        $compiler->setImportPaths( REACHCSS_DIR . 'import/scss/' );
 
         $variables = apply_filters( 'reachcss/variables' , [] );
 
@@ -87,6 +87,6 @@ class ReachParser {
      */
     private static function datetimestamp() {
 
-        return "/** ReachCSS Version " . BEAVERCSS_VERSION . ", Generated on: " . date( 'Y-m-d H:i:s' ) . " **/\r\n";
+        return "/** ReachCSS Version " . REACHCSS_VERSION . ", Generated on: " . date( 'Y-m-d H:i:s' ) . " **/\r\n";
     }
 }

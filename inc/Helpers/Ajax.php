@@ -3,7 +3,7 @@ namespace ReachCSS\Helpers;
 use ReachCSS\Helpers\File;
 use ReachCSS\Helpers\Notification;
 use ReachCSS\Helpers\Timer;
-use ReachCSS\BeaverParser;
+use ReachCSS\ReachParser;
 
 class Ajax {
 
@@ -35,7 +35,7 @@ class Ajax {
             // make sure to use the altered variables
             add_filter( 'reachcss/variables' , function( $variables ) use ( $_PUT ) { return array_merge( $variables , $_PUT ); } , 100 , 1 );
     
-            $success = BeaverParser::compile();
+            $success = ReachParser::compile();
             $time = $timer->get_time();
     
             if ($success) {

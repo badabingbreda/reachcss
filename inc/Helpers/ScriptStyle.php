@@ -12,7 +12,7 @@ class ScriptStyle {
     }
     
     /**
-     * beavercss
+     * reachcss
      * 
      * enqueue the css
      *
@@ -20,12 +20,12 @@ class ScriptStyle {
      */
     public static function reachcss() {
 
-        $settings = File::dir_settings( 'beavercss' );
+        $settings = File::dir_settings( 'reachcss' );
         wp_enqueue_style( 'reachcss',  $settings['baseurl'] . '/reachcss/reachcss.css' , false, get_option( 'reachcss_fileversion', false ) , 'all' );
     }
     
     public static function admin_files() {
-        wp_enqueue_script( 'savvypanel-handler', BEAVERCSS_URL . 'js/savvy-panel.js', null, BEAVERCSS_VERSION, false );
+        wp_enqueue_script( 'savvypanel-handler', REACHCSS_URL . 'js/savvy-panel.js', null, REACHCSS_VERSION, false );
     }
 
 

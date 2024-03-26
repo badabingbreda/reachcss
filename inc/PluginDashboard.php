@@ -13,13 +13,13 @@ class PluginDashboard {
 
     public static function init() {
 
-        $values = apply_filters ( 'beavercss/variables' , [] );
+        $values = apply_filters ( 'reachcss/variables' , [] );
 
         new \SavvyPanel\Dashboard( [ 
-            'id' => 'beavercss',
-            'menu_title' => 'Beaver CSS',
-            'title' => 'Beaver CSS',
-            'heading' => 'Beaver CSS Settings',
+            'id' => 'reachcss',
+            'menu_title' => 'Reach CSS',
+            'title' => 'Reach CSS',
+            'heading' => 'Reach CSS',
             'type' => 'menu',
         ] ); 
 
@@ -30,7 +30,7 @@ class PluginDashboard {
          */
         new \SavvyPanel\Tab( [
             'id' => 'viewport',
-            'dashboard' => 'beavercss',  // our dashboard id
+            'dashboard' => 'reachcss',  // our dashboard id
             //'title' => 'Main',
             'menu_title' => 'Viewport',
             'menu_slug' => 'viewport',
@@ -39,13 +39,13 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlSection([
             'id' => 'breakpoints',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'viewport',
             'label' => 'Breakpoints',
         ]);
 
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'viewport',
             'section' => 'breakpoints',
             'id' => 'media-breakpoint-s',
@@ -55,7 +55,7 @@ class PluginDashboard {
         ]);
         
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'viewport',
             'section' => 'breakpoints',
             'id' => 'media-breakpoint-m',
@@ -65,7 +65,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'viewport',
             'section' => 'breakpoints',
             'id' => 'media-breakpoint-l',
@@ -75,7 +75,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'viewport',
             'section' => 'breakpoints',
             'id' => 'media-breakpoint-xl',
@@ -91,7 +91,7 @@ class PluginDashboard {
          */
         new \SavvyPanel\Tab( [
             'id' => 'typography',
-            'dashboard' => 'beavercss',  // our dashboard id
+            'dashboard' => 'reachcss',  // our dashboard id
             //'title' => 'Main',
             'menu_title' => 'Typography',
             'menu_slug' => 'typography',
@@ -100,13 +100,13 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlSection([
             'id' => 'typography',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'typography',
             'label' => 'Typography',
         ]);
 
         new \SavvyPanel\Controls\ControlParagraph( [
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'typography',
             'section' => 'typography',
             'id' => '',
@@ -130,7 +130,7 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlHtml([
             'id' => 'type-base',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'typography',
             'section' => 'typography',
             'class' => 'duo-input',
@@ -152,7 +152,7 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlHtml([
             'id' => 'type-scale',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'typography',
             'section' => 'typography',
             'label' => 'Type Scale',
@@ -169,7 +169,7 @@ class PluginDashboard {
 
         new \SavvyPanel\Tab( [
             'id' => 'colors',
-            'dashboard' => 'beavercss',  // our dashboard id
+            'dashboard' => 'reachcss',  // our dashboard id
             //'title' => 'Extra',
             'menu_title' => 'Colors',
             'menu_slug' => 'colors',
@@ -178,13 +178,13 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlSection([
             'id' => 'brandcolors',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'label' => 'Brand Colors',
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'brandcolors',
             'value' => PluginVariables::get('action-hex' ),
@@ -194,7 +194,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'brandcolors',
             'value' => PluginVariables::get('primary-hex' ),
@@ -204,7 +204,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'brandcolors',
             'value' => PluginVariables::get('secondary-hex' ),
@@ -214,7 +214,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'brandcolors',
             'value' => PluginVariables::get('accent-hex' ),
@@ -224,7 +224,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'brandcolors',
             'value' => PluginVariables::get('base-hex' ),
@@ -234,7 +234,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'brandcolors',
             'value' => PluginVariables::get('shade-hex' ),
@@ -245,7 +245,7 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlSwitch([
             'id' => 'add-contextual-colors',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'label' => 'Add Contextual Colors?',
             'target' => '#contextualcolors',
@@ -256,13 +256,13 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlSection([
             'id' => 'contextualcolors',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'label' => 'Contextual Colors',
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'contextualcolors',
             'value' => PluginVariables::get('success-hex' ),
@@ -272,7 +272,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'contextualcolors',
             'value' => PluginVariables::get('danger-hex' ),
@@ -282,7 +282,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'contextualcolors',
             'value' => PluginVariables::get('warning-hex' ),
@@ -292,7 +292,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlColor( [ 
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'colors',
             'section' => 'contextualcolors',
             'value' => PluginVariables::get('info-hex' ),
@@ -309,7 +309,7 @@ class PluginDashboard {
 
          new \SavvyPanel\Tab( [
             'id' => 'radius',
-            'dashboard' => 'beavercss',  // our dashboard id
+            'dashboard' => 'reachcss',  // our dashboard id
 
             //'title' => 'Extra',
             'menu_title' => 'Radius',
@@ -319,13 +319,13 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlSection([
             'id' => 'radius',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'radius',
             'label' => 'Radius',
         ]);
 
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'radius',
             'section' => 'radius',
             'id' => 'radius-base',
@@ -335,7 +335,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'radius',
             'section' => 'radius',
             'id' => 'radius-scale',
@@ -352,7 +352,7 @@ class PluginDashboard {
 
          new \SavvyPanel\Tab( [
             'id' => 'grid',
-            'dashboard' => 'beavercss',  // our dashboard id
+            'dashboard' => 'reachcss',  // our dashboard id
             //'title' => 'Extra',
             'menu_title' => 'Grid',
             'menu_slug' => 'grid',
@@ -361,13 +361,13 @@ class PluginDashboard {
 
         new \SavvyPanel\Controls\ControlSection([
             'id' => 'grid',
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'grid',
             'label' => 'Grid',
         ]);
 
         // new ControlText([
-        //     'dashboard' => 'beavercss',
+        //     'dashboard' => 'reachcss',
         //     'tab' => 'grid',
         //     'section' => 'grid',
         //     'id' => 'max-grids',
@@ -376,7 +376,7 @@ class PluginDashboard {
         // ]);
 
         new \SavvyPanel\Controls\ControlSlider([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'grid',
             'section' => 'grid',
             'id' => 'max-grids',
@@ -386,7 +386,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'grid',
             'section' => 'grid',
             'id' => 'gap-base',
@@ -396,7 +396,7 @@ class PluginDashboard {
         ]);
 
         new \SavvyPanel\Controls\ControlText([
-            'dashboard' => 'beavercss',
+            'dashboard' => 'reachcss',
             'tab' => 'grid',
             'section' => 'grid',
             'id' => 'gap-scale',
