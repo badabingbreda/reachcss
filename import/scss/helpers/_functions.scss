@@ -14,6 +14,7 @@
   @return $rounded_number;
 }
 
+// 
 @function math-pow($base, $exponent) {
   $result: 1;
   $abs_exponent: abs($exponent);
@@ -59,4 +60,54 @@
 
 @function widthCalc( $fraction ) {
     @return 100% * $fraction;
+}
+
+// Test if `$value` is a valid direction
+// @param {*} $value - Value to test
+// @return {Bool}
+@function is-direction($value) {
+  $index-keyword : false;
+  $index-unit : false;
+
+  $direction-list : (to top, to top right, to right top, to right, to bottom right, to right bottom, to bottom, to bottom left, to left bottom, to left, to left top, to top left);
+  $unit-direction-list : ( 'deg' , 'grad' , 'turn' , 'rad' );
+  
+  $index-keyword : index($direction-list, $value);
+  @if  $index-keyword == null  {
+    $index-unit : index( $unit-direction-list , unit($value));
+  }
+  @return $index-keyword or $index-unit;
+}
+
+// Convert a direction to legacy syntax
+// @param {Keyword | Angle} $value - Value to convert
+// @require {function} is-direction
+// @require {function} convert-angle
+// @throw Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.;
+@function legacy-direction($value) {
+  @if is-direction($value) == false {
+    @error "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.";
+  }
+
+  $conversion-map: (
+    to top          : bottom,
+    to top right    : bottom left,
+    to right top    : left bottom,
+    to right        : left,
+    to bottom right : top left,
+    to right bottom : left top,
+    to bottom       : top,
+    to bottom left  : top right,
+    to left bottom  : right top,
+    to left         : right,
+    to left top     : right bottom,
+    to top left     : bottom right
+  );
+
+  $index : index($conversion-map, $value);
+  @if $index {
+    @return nth($conversion-map, $index);
+  }
+
+  @return 90deg - $value;
 }

@@ -5,7 +5,14 @@ html {
     font-size: $type-base-min;
 }
 
+.#{$prefix}linear-1 {
+    @include linear-gradient(220deg, rgba(12,21,43,.5), rgba(23,39,82,.5) 30%, rgba(1,2,4,.5));
+}
+
 :root {
+    
+    /* nice */
+    --typebase-unit: #{unit( $type-base-min )};
 
     /* --colorset names */
     @each $setName, $set in $colors {

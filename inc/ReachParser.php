@@ -4,6 +4,8 @@ namespace ReachCSS;
 use ReachCSS\Helpers\File;
 
 use \ScssPhp\ScssPhp\Compiler;
+use \ScssPhp\ScssPhp\ValueConverter;
+use ScssPhp\ScssPhp\Node\Number;
 
 class ReachParser {
 
@@ -47,7 +49,21 @@ class ReachParser {
          */
         $compiler->setImportPaths( REACHCSS_DIR . 'import/scss/' );
 
+        // $compiler->registerFunction(
+        //     'index',
+        //     function( $args ) use ($compiler ) {
+        //         $array = $compiler->assertList($args[0], 'number1');
+        //         $key = $compiler->assertNumber($args[1], 'number2');
+
+
+        //         return new Number(array_search( $key , $array) , '');
+        //     },
+        //     [ 'number1' , 'number2' ]
+        // );
+
         $variables = apply_filters( 'reachcss/variables' , [] );
+
+        array_walk( $variables , function( $value ) { return ValueConverter::parseValue( $value);});
 
         /**
          * add variables at this point. 
@@ -64,6 +80,7 @@ class ReachParser {
              $success = true;
          } catch (\Exception $e) {
             $css = "somthing didn't go as planned...";
+            $css .= $e->getMessage();
             $success = false;
          }
 
@@ -76,6 +93,13 @@ class ReachParser {
              File::write_file( self::$directory ,  self::$filename . '.css' , $css );
              // add or update option value
              \update_option( 'reachcss_fileversion' , date( 'Ymd-His') );
+         } else {
+            // prepend with datetime stamp
+            $css = self::datetimestamp() . $css;
+            // create the directory if not already exists
+            File::create_dir( self::$directory );
+            File::write_file( self::$directory ,  'last-error.txt' , $css );
+
          }
          return $success;
     }
