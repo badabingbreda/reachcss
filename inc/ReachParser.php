@@ -63,7 +63,9 @@ class ReachParser {
 
         $variables = apply_filters( 'reachcss/variables' , [] );
 
-        array_walk( $variables , function( $value ) { return ValueConverter::parseValue( $value);});
+        foreach ( $variables as $k => $variable ) {
+            $variables[ $k ] = ValueConverter::parseValue( $variable );
+        }
 
         /**
          * add variables at this point. 

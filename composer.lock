@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f444ee9c979d865ebe81421321ae6af0",
+    "content-hash": "accd9fcfbcf07cd1b15e9f0cc9b91bd7",
     "packages": [
         {
             "name": "badabingbreda/savvy-panel",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/badabingbreda/savvy-panel.git",
-                "reference": "d66f7c87bb3b217a7172b045738e0180762d9479"
+                "reference": "cee794c77a78ba818413b5401540c6cc429769d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/badabingbreda/savvy-panel/zipball/d66f7c87bb3b217a7172b045738e0180762d9479",
-                "reference": "d66f7c87bb3b217a7172b045738e0180762d9479",
+                "url": "https://api.github.com/repos/badabingbreda/savvy-panel/zipball/cee794c77a78ba818413b5401540c6cc429769d3",
+                "reference": "cee794c77a78ba818413b5401540c6cc429769d3",
                 "shasum": ""
             },
             "default-branch": true,
@@ -46,22 +46,22 @@
             ],
             "support": {
                 "issues": "https://github.com/badabingbreda/savvy-panel/issues",
-                "source": "https://github.com/badabingbreda/savvy-panel/tree/main"
+                "source": "https://github.com/badabingbreda/savvy-panel/tree/0.0.3"
             },
-            "time": "2024-03-26T16:55:07+00:00"
+            "time": "2024-08-21T15:23:01+00:00"
         },
         {
             "name": "scssphp/scssphp",
-            "version": "v1.12.1",
+            "version": "v1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scssphp/scssphp.git",
-                "reference": "394ed1e960138710a60d035c1a85d43d0bf0faeb"
+                "reference": "63d1157457e5554edf00b0c1fabab4c1511d2520"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/394ed1e960138710a60d035c1a85d43d0bf0faeb",
-                "reference": "394ed1e960138710a60d035c1a85d43d0bf0faeb",
+                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/63d1157457e5554edf00b0c1fabab4c1511d2520",
+                "reference": "63d1157457e5554edf00b0c1fabab4c1511d2520",
                 "shasum": ""
             },
             "require": {
@@ -126,9 +126,9 @@
             ],
             "support": {
                 "issues": "https://github.com/scssphp/scssphp/issues",
-                "source": "https://github.com/scssphp/scssphp/tree/v1.12.1"
+                "source": "https://github.com/scssphp/scssphp/tree/v1.13.0"
             },
-            "time": "2024-01-13T12:36:40+00:00"
+            "time": "2024-08-17T21:02:11+00:00"
         }
     ],
     "packages-dev": [],
